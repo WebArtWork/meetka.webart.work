@@ -1,0 +1,88 @@
+@if (shop(); as shop) {
+	<div class="coffee-shop-page">
+		@if (shop.photos[0]) {
+			<img class="coffee-shop-page__photo" [src]="shop.photos[0]" [alt]="shop.name" />
+		}
+
+		<div class="coffee-shop-page__header">
+			<h1 class="coffee-shop-page__title">{{ shop.name }}</h1>
+			<app-interest-chips [interestIds]="shop.interestIds" />
+		</div>
+
+		<p class="coffee-shop-page__description">{{ shop.description }}</p>
+
+		<div class="coffee-shop-page__info">
+			<div>
+				<i class="pi pi-map-marker"></i>
+				<span>{{ shop.address }}</span>
+			</div>
+			<div>
+				<i class="pi pi-clock"></i>
+				<span>{{ shop.workingHours }}</span>
+			</div>
+			<div>
+				<i class="pi pi-phone"></i>
+				<span>{{ shop.phone }}</span>
+			</div>
+		</div>
+
+		<div class="coffee-shop-page__actions">
+			<button pButton type="button" (click)="createMeet()">
+				{{ translateService.translate('Create Meet')() }}
+			</button>
+			<button pButton type="button" severity="secondary" (click)="openMenu()">
+				{{ translateService.translate('Open Menu')() }}
+			</button>
+			<button pButton type="button" severity="secondary" (click)="shareCoffeeShop()">
+				{{ translateService.translate('Share')() }}
+			</button>
+			<button pButton type="button" severity="secondary" (click)="openAllMeets()">
+				{{ translateService.translate('All meets here')() }}
+			</button>
+		</div>
+
+		<section class="coffee-shop-page__section">
+			<h2>{{ translateService.translate('Upcoming meets')() }}</h2>
+			@if (upcomingMeets().length) {
+				<div class="coffee-shop-page__meets">
+					@for (meet of upcomingMeets(); track meet.id) {
+						<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName()" (open)="openMeet(meet.id)" />
+					}
+				</div>
+			} @else {
+				<p class="coffee-shop-page__empty">{{ translateService.translate('No upcoming meets yet — be the first to create one.')() }}</p>
+			}
+		</section>
+
+		@if (recurringMeets().length) {
+			<section class="coffee-shop-page__section">
+				<h2>{{ translateService.translate('Recurring meets')() }}</h2>
+				<div class="coffee-shop-page__meets">
+					@for (meet of recurringMeets(); track meet.id) {
+						<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName()" (open)="openMeet(meet.id)" />
+					}
+				</div>
+			</section>
+		}
+
+		@if (baristas().length) {
+			<section class="coffee-shop-page__section">
+				<h2>{{ translateService.translate('Baristas')() }}</h2>
+				<div class="coffee-shop-page__baristas">
+					@for (barista of baristas(); track barista.id) {
+						<a class="coffee-shop-page__barista" [routerLink]="['/barista', barista.id]">
+							<img [src]="barista.photo" [alt]="barista.name" />
+							<span>{{ barista.name }}</span>
+						</a>
+					}
+				</div>
+			</section>
+		}
+
+		<p class="coffee-shop-page__footnote">
+			{{ translateService.translate('This coffee shop is a Meetka partner — meets can only be organized here and at other partner locations.')() }}
+		</p>
+	</div>
+} @else {
+	<p class="coffee-shop-page__empty">{{ translateService.translate('Coffee shop not found.')() }}</p>
+}

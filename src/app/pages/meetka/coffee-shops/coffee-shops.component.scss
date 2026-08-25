@@ -1,0 +1,28 @@
+.coffee-shops-page__title {
+	margin: 0 0 1rem;
+}
+
+.coffee-shops-page__filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.coffee-shops-page__search {
+	flex: 1 1 220px;
+}
+
+.coffee-shops-page__interests {
+	min-width: 200px;
+}
+
+.coffee-shops-page__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	gap: 1rem;
+}
+
+.coffee-shops-page__empty {
+	color: var(--c-text-muted);
+}

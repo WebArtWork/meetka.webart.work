@@ -53,6 +53,15 @@
 
 	<app-nav-icon
 		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('Coffee Shops')() : ''"
+		[ariaLabel]="translateService.translate('Coffee Shops')()"
+		(click)="closeIfOverlay()"
+		routerLink="/coffee-shops"
+		icon="shop"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
 		[name]="showNames() ? translateService.translate('Settings')() : ''"
 		[ariaLabel]="translateService.translate('Settings')()"
 		(click)="closeIfOverlay()"

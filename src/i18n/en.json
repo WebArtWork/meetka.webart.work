@@ -72,5 +72,18 @@
 	"Date",
 	"Coffee Shops",
 	"Interactive map is not configured yet. Showing nearby coffee shops as a list instead.",
-	"Select a coffee shop marker to preview its meets."
+	"Select a coffee shop marker to preview its meets.",
+	"Nearby",
+	"No coffee shops match your filters yet.",
+	"Create Meet",
+	"Open Menu",
+	"Share",
+	"All meets here",
+	"Upcoming meets",
+	"No upcoming meets yet — be the first to create one.",
+	"Recurring meets",
+	"Baristas",
+	"This coffee shop is a Meetka partner — meets can only be organized here and at other partner locations.",
+	"Coffee shop not found.",
+	"Link copied to clipboard"
 ]
