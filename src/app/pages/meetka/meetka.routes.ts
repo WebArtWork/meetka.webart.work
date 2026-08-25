@@ -36,11 +36,27 @@ export const meetkaRoutes: Routes = [
 			import('./meets/meets.component').then((m) => m.MeetsPageComponent),
 	},
 	{
+		path: 'meet/mutate',
+		canActivate: [MetaGuard, authenticatedGuard],
+		data: { meta: { title: 'Зустріч' } },
+		loadComponent: () =>
+			import('./meet-mutate/meet-mutate.component').then(
+				(m) => m.MeetMutateComponent,
+			),
+	},
+	{
 		path: 'meet/:id',
 		canActivate: [MetaGuard],
 		data: { meta: { title: 'Зустріч' } },
 		loadComponent: () =>
 			import('./meet/meet.component').then((m) => m.MeetPageComponent),
+	},
+	{
+		path: 'menu/:coffeeShopId',
+		canActivate: [MetaGuard],
+		data: { meta: { title: 'Меню' } },
+		loadComponent: () =>
+			import('./menu/menu.component').then((m) => m.MenuPageComponent),
 	},
 	{
 		path: 'my-meets',

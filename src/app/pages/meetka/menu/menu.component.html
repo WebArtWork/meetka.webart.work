@@ -1,0 +1,45 @@
+@if (shop(); as shop) {
+	<div class="menu-page">
+		<button pButton type="button" severity="secondary" size="small" (click)="back()">
+			<i class="pi pi-arrow-left"></i>
+			{{ translateService.translate('Back to Coffee Shop')() }}
+		</button>
+
+		<h1 class="menu-page__title">{{ shop.name }}</h1>
+		<p class="menu-page__subtitle">{{ shop.address }}</p>
+
+		@for (category of shop.menu; track category.id) {
+			<section class="menu-page__category">
+				<h2>{{ category.name }}</h2>
+
+				<div class="menu-page__products">
+					@for (product of category.products; track product.id) {
+						<div class="menu-page__product" [class.menu-page__product--unavailable]="!product.available">
+							<div class="menu-page__product-main">
+								<span class="menu-page__product-name">{{ product.name }}</span>
+								<span class="menu-page__product-price">{{ product.price | number: '1.0-0' }} ₴</span>
+							</div>
+							<p class="menu-page__product-description">{{ product.description }}</p>
+
+							@if (product.options?.length) {
+								<div class="menu-page__product-options">
+									@for (option of product.options; track option.label) {
+										<span class="menu-page__product-option">+ {{ option.label }} ({{ option.price | number: '1.0-0' }} ₴)</span>
+									}
+								</div>
+							}
+
+							@if (!product.available) {
+								<p-tag severity="secondary" [value]="translateService.translate('Currently unavailable')()" />
+							}
+						</div>
+					}
+				</div>
+			</section>
+		} @empty {
+			<p class="menu-page__empty">{{ translateService.translate('Menu is not available yet.')() }}</p>
+		}
+	</div>
+} @else {
+	<p class="menu-page__empty">{{ translateService.translate('Coffee shop not found.')() }}</p>
+}

@@ -1,0 +1,144 @@
+<div class="meet-mutate">
+	<h1 class="meet-mutate__title">
+		{{ isEditMode ? translateService.translate('Edit Meet')() : translateService.translate('Create Meet')() }}
+	</h1>
+
+	<div class="meet-mutate__field">
+		<label>{{ translateService.translate('Coffee Shop')() }}</label>
+		<p-select
+			[options]="coffeeShops()"
+			optionLabel="name"
+			optionValue="id"
+			[placeholder]="translateService.translate('Choose a partner coffee shop...')()"
+			[ngModel]="model().coffeeShopId"
+			(ngModelChange)="updateModel('coffeeShopId', $event)"
+		/>
+	</div>
+
+	<div class="meet-mutate__field">
+		<label>{{ translateService.translate('Title')() }}</label>
+		<input
+			pInputText
+			[placeholder]="translateService.translate('Meet title...')()"
+			[ngModel]="model().title"
+			(ngModelChange)="updateModel('title', $event)"
+		/>
+	</div>
+
+	<div class="meet-mutate__field">
+		<label>{{ translateService.translate('Description')() }}</label>
+		<textarea
+			pTextarea
+			rows="3"
+			[placeholder]="translateService.translate('What is this meet about?')()"
+			[ngModel]="model().description"
+			(ngModelChange)="updateModel('description', $event)"
+		></textarea>
+	</div>
+
+	<div class="meet-mutate__field">
+		<label>{{ translateService.translate('Interests')() }}</label>
+		<p-multiSelect
+			[options]="interests"
+			optionLabel="label"
+			optionValue="id"
+			[placeholder]="translateService.translate('Interests')()"
+			[ngModel]="model().interestIds"
+			(ngModelChange)="updateModel('interestIds', $event)"
+		/>
+	</div>
+
+	<div class="meet-mutate__row">
+		<div class="meet-mutate__field">
+			<label>{{ translateService.translate('Visibility')() }}</label>
+			<p-selectButton
+				[options]="visibilityOptions"
+				optionLabel="label"
+				optionValue="value"
+				[ngModel]="model().visibility"
+				(ngModelChange)="updateModel('visibility', $event)"
+			/>
+		</div>
+
+		<div class="meet-mutate__field">
+			<label>{{ translateService.translate('Date')() }}</label>
+			<p-datepicker
+				[showIcon]="true"
+				[ngModel]="model().date"
+				(ngModelChange)="updateModel('date', $event)"
+			/>
+		</div>
+	</div>
+
+	<div class="meet-mutate__row">
+		<div class="meet-mutate__field">
+			<label>{{ translateService.translate('Start time')() }}</label>
+			<input type="time" class="meet-mutate__time" [ngModel]="model().startTime" (ngModelChange)="updateModel('startTime', $event)" />
+		</div>
+
+		<div class="meet-mutate__field">
+			<label>{{ translateService.translate('End time')() }}</label>
+			<input type="time" class="meet-mutate__time" [ngModel]="model().endTime" (ngModelChange)="updateModel('endTime', $event)" />
+		</div>
+	</div>
+
+	<div class="meet-mutate__field meet-mutate__toggle-field">
+		<label>
+			<p-toggleSwitch [ngModel]="model().recurringEnabled" (ngModelChange)="updateModel('recurringEnabled', $event)" />
+			{{ translateService.translate('Recurring')() }}
+		</label>
+
+		@if (model().recurringEnabled) {
+			<div class="meet-mutate__recurrence">
+				<p-select
+					[options]="recurrenceTypeOptions"
+					optionLabel="label"
+					optionValue="value"
+					[ngModel]="model().recurrenceType"
+					(ngModelChange)="updateModel('recurrenceType', $event)"
+				/>
+
+				@if (model().recurrenceType !== 'monthly') {
+					<p-multiSelect
+						[options]="weekdays"
+						optionLabel="label"
+						optionValue="value"
+						[placeholder]="translateService.translate('Days')()"
+						[ngModel]="model().recurrenceDays"
+						(ngModelChange)="updateModel('recurrenceDays', $event)"
+					/>
+				}
+			</div>
+		}
+	</div>
+
+	<div class="meet-mutate__field meet-mutate__toggle-field">
+		<label>
+			<p-toggleSwitch [ngModel]="model().participantLimitEnabled" (ngModelChange)="updateModel('participantLimitEnabled', $event)" />
+			{{ translateService.translate('Limit participants')() }}
+		</label>
+
+		@if (model().participantLimitEnabled) {
+			<p-inputNumber
+				[min]="1"
+				[max]="200"
+				[ngModel]="model().participantLimit"
+				(ngModelChange)="updateModel('participantLimit', $event)"
+			/>
+		}
+	</div>
+
+	<div class="meet-mutate__actions">
+		<button pButton type="button" [disabled]="isSaveDisabled()" (click)="save()">
+			{{ translateService.translate('Save')() }}
+		</button>
+		<button pButton type="button" severity="secondary" (click)="cancel()">
+			{{ translateService.translate('Cancel')() }}
+		</button>
+		@if (isEditMode) {
+			<button pButton type="button" severity="danger" (click)="deleteMeet()">
+				{{ translateService.translate('Cancel Meet')() }}
+			</button>
+		}
+	</div>
+</div>

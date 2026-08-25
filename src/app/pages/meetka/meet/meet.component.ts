@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
@@ -16,7 +16,7 @@ const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 @Component({
 	selector: 'app-meet',
-	imports: [RouterLink, ButtonModule, TagModule, AvatarModule, InterestChipsComponent],
+	imports: [ButtonModule, TagModule, AvatarModule, InterestChipsComponent],
 	templateUrl: './meet.component.html',
 	styleUrl: './meet.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
