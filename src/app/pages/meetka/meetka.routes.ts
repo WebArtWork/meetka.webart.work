@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { MetaGuard } from '@wawjs/ngx-core';
+import { authenticatedGuard } from '@wawjs/ngx-bos';
 
 export const meetkaRoutes: Routes = [
 	{
@@ -25,6 +26,22 @@ export const meetkaRoutes: Routes = [
 		loadComponent: () =>
 			import('./coffee-shop/coffee-shop.component').then(
 				(m) => m.CoffeeShopPageComponent,
+			),
+	},
+	{
+		path: 'meets',
+		canActivate: [MetaGuard],
+		data: { meta: { title: 'Зустрічі' } },
+		loadComponent: () =>
+			import('./meets/meets.component').then((m) => m.MeetsPageComponent),
+	},
+	{
+		path: 'my-meets',
+		canActivate: [MetaGuard, authenticatedGuard],
+		data: { meta: { title: 'Мої зустрічі' } },
+		loadComponent: () =>
+			import('./my-meets/my-meets.component').then(
+				(m) => m.MyMeetsPageComponent,
 			),
 	},
 ];

@@ -62,6 +62,24 @@
 
 	<app-nav-icon
 		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('Meets')() : ''"
+		[ariaLabel]="translateService.translate('Meets')()"
+		(click)="closeIfOverlay()"
+		routerLink="/meets"
+		icon="calendar"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('My Meets')() : ''"
+		[ariaLabel]="translateService.translate('My Meets')()"
+		(click)="closeIfOverlay()"
+		routerLink="/my-meets"
+		icon="bookmark"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
 		[name]="showNames() ? translateService.translate('Settings')() : ''"
 		[ariaLabel]="translateService.translate('Settings')()"
 		(click)="closeIfOverlay()"
