@@ -67,4 +67,31 @@ export const meetkaRoutes: Routes = [
 				(m) => m.MyMeetsPageComponent,
 			),
 	},
+	{
+		path: 'for-coffee-shops',
+		canActivate: [MetaGuard],
+		data: { meta: { title: 'Для кавʼярень' } },
+		loadComponent: () =>
+			import('./for-coffee-shops/for-coffee-shops.component').then(
+				(m) => m.ForCoffeeShopsPageComponent,
+			),
+	},
+	{
+		path: 'for-baristas',
+		canActivate: [MetaGuard],
+		data: { meta: { title: 'Для баристів' } },
+		loadComponent: () =>
+			import('./for-baristas/for-baristas.component').then(
+				(m) => m.ForBaristasPageComponent,
+			),
+	},
+	{
+		path: 'barista/:id',
+		canActivate: [MetaGuard],
+		data: { meta: { title: 'Бариста' } },
+		loadComponent: () =>
+			import('./barista-profile/barista-profile.component').then(
+				(m) => m.BaristaProfilePageComponent,
+			),
+	},
 ];

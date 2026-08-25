@@ -1,0 +1,38 @@
+<div class="landing-page">
+	<header class="landing-page__hero">
+		<h1>{{ translateService.translate('Grow your coffee shop community with Meetka')() }}</h1>
+		<p>{{ translateService.translate('Meetka turns your coffee shop into a local meeting point — real people, meeting in real life, over coffee you already serve.')() }}</p>
+		<a pButton routerLink="/sign">{{ translateService.translate('Become a Partner')() }}</a>
+	</header>
+
+	<section class="landing-page__section">
+		<h2>{{ translateService.translate('How it works')() }}</h2>
+		<ul class="landing-page__list">
+			<li>{{ translateService.translate('Your coffee shop appears as a marker on the Meetka map.')() }}</li>
+			<li>{{ translateService.translate('Meetka users create and join meets at your location — you don\'t have to organize anything.')() }}</li>
+			<li>{{ translateService.translate('Recurring communities (language exchange, board games, running clubs) return to your shop week after week.')() }}</li>
+			<li>{{ translateService.translate('Your existing menu is shown inside Meetka, so visitors know what to expect.')() }}</li>
+		</ul>
+	</section>
+
+	<section class="landing-page__section">
+		<h2>{{ translateService.translate('Why partner with Meetka')() }}</h2>
+		<p>{{ translateService.translate('Meetka is about community and additional foot traffic, not a booking or payments platform. In Phase 1 there are no fees, no operational dashboard to manage, and no obligations beyond being a welcoming venue.')() }}</p>
+	</section>
+
+	<section class="landing-page__section">
+		<h2>{{ translateService.translate('FAQ')() }}</h2>
+		<p-accordion [multiple]="true">
+			@for (item of faq; track item.question) {
+				<p-accordionpanel [value]="item.question">
+					<p-accordionheader>{{ translateService.translate(item.question)() }}</p-accordionheader>
+					<p-accordioncontent>{{ translateService.translate(item.answer)() }}</p-accordioncontent>
+				</p-accordionpanel>
+			}
+		</p-accordion>
+	</section>
+
+	<footer class="landing-page__cta">
+		<a pButton routerLink="/sign">{{ translateService.translate('Become a Partner')() }}</a>
+	</footer>
+</div>

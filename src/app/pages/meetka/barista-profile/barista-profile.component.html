@@ -1,0 +1,53 @@
+@if (barista(); as barista) {
+	<div class="barista-page">
+		<div class="barista-page__header">
+			<img class="barista-page__photo" [src]="barista.photo" [alt]="barista.name" />
+			<div>
+				<h1 class="barista-page__name">{{ barista.name }}</h1>
+				@if (coffeeShop(); as shop) {
+					<button type="button" class="barista-page__shop" (click)="openCoffeeShop()">{{ shop.name }}</button>
+				}
+				<p-tag
+					[severity]="barista.available ? 'success' : 'secondary'"
+					[value]="barista.available ? translateService.translate('Available now')() : translateService.translate('Not available')()"
+				/>
+			</div>
+		</div>
+
+		<p class="barista-page__bio">{{ barista.bio }}</p>
+
+		<app-interest-chips [interestIds]="barista.interestIds" />
+
+		@if (barista.tipLinks.length) {
+			<section class="barista-page__section">
+				<h2>{{ translateService.translate('Tip')() }}</h2>
+				<div class="barista-page__links">
+					@for (link of barista.tipLinks; track link.url) {
+						<a [href]="link.url" target="_blank" rel="noopener">{{ link.label }}</a>
+					}
+				</div>
+			</section>
+		}
+
+		@if (barista.socialLinks.length) {
+			<section class="barista-page__section">
+				<h2>{{ translateService.translate('Social')() }}</h2>
+				<div class="barista-page__links">
+					@for (link of barista.socialLinks; track link.url) {
+						<a [href]="link.url" target="_blank" rel="noopener">{{ link.label }}</a>
+					}
+				</div>
+			</section>
+		}
+
+		<button pButton type="button" severity="secondary" (click)="shareProfile()">
+			{{ translateService.translate('Share profile')() }}
+		</button>
+
+		<p class="barista-page__footnote">
+			{{ translateService.translate('Baristas are part of the Meetka community — helping visitors find their meet and feel welcome.')() }}
+		</p>
+	</div>
+} @else {
+	<p class="barista-page__empty">{{ translateService.translate('Barista not found.')() }}</p>
+}
