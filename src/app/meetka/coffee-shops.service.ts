@@ -1,0 +1,20 @@
+import { Injectable, signal } from '@angular/core';
+import { COFFEE_SHOPS } from './meetka.mock-data';
+import { CoffeeShop } from './meetka.models';
+
+@Injectable({ providedIn: 'root' })
+export class CoffeeShopsService {
+	private readonly _shops = signal<CoffeeShop[]>(COFFEE_SHOPS);
+	readonly shops = this._shops.asReadonly();
+
+	get(id: string): CoffeeShop | undefined {
+		return this._shops().find((shop) => shop.id === id);
+	}
+
+	byInterests(interestIds: string[]): CoffeeShop[] {
+		if (!interestIds.length) return this._shops();
+		return this._shops().filter((shop) =>
+			shop.interestIds.some((id) => interestIds.includes(id)),
+		);
+	}
+}
