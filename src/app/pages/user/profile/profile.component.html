@@ -23,7 +23,66 @@
 				<button pButton type="submit" [disabled]="isSubmitDisabled()"><span translate>Update</span></button>
 			</div>
 		</form>
+
+		<div class="profile__meetka-fields">
+			<div>
+				<label>{{ translateService.translate('Age')() }}</label>
+				<p-inputNumber
+					[min]="13"
+					[max]="120"
+					[ngModel]="meetkaProfileService.extras().age"
+					(ngModelChange)="updateAge($event)"
+				/>
+			</div>
+
+			<div>
+				<label>{{ translateService.translate('Gender')() }}</label>
+				<p-selectButton
+					[options]="genderOptions"
+					optionLabel="label"
+					optionValue="value"
+					[ngModel]="meetkaProfileService.extras().gender"
+					(ngModelChange)="updateGender($event)"
+				/>
+			</div>
+
+			<div>
+				<label>{{ translateService.translate('Interests')() }}</label>
+				<p-multiSelect
+					[options]="interests"
+					optionLabel="label"
+					optionValue="id"
+					[placeholder]="translateService.translate('Interests')()"
+					[ngModel]="meetkaProfileService.extras().interestIds"
+					(ngModelChange)="updateInterestIds($event)"
+				/>
+			</div>
+		</div>
 	</div>
+
+	@if (upcomingMeets().length) {
+		<div class="profile__meets-section">
+			<h2>{{ translateService.translate('Upcoming meets')() }}</h2>
+			<div class="profile__meets-grid">
+				@for (meet of upcomingMeets(); track meet.id) {
+					<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
+				}
+			</div>
+		</div>
+	}
+
+	@if (createdMeets().length) {
+		<div class="profile__meets-section">
+			<h2>{{ translateService.translate('Meets created by me')() }}</h2>
+			<div class="profile__meets-grid">
+				@for (meet of createdMeets(); track meet.id) {
+					<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
+				}
+			</div>
+		</div>
+	}
+
+	<a class="profile__all-meets" routerLink="/my-meets">{{ translateService.translate('See all my meets')() }}</a>
 
 	<button type="button" class="profile__logout" (click)="userService.logout()">
 		<i class="pi pi-sign-out"></i>

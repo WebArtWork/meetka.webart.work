@@ -7,9 +7,11 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormField, form, submit } from '@angular/forms/signals';
+import { FormsModule } from '@angular/forms';
 import { UserService } from '@wawjs/ngx-bos';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { PasswordModule } from '@wawjs/ngx-prime/password';
+import { ToggleSwitchModule } from '@wawjs/ngx-prime/toggleswitch';
 import {
 	LanguageService,
 	TranslateDirective,
@@ -17,11 +19,14 @@ import {
 } from '@wawjs/ngx-translate';
 import { FieldErrorComponent } from '../../../shared/field-error/field-error.component';
 import { ThemeState } from '../../../theme/theme-state';
+import { GeoService } from '../../../meetka/geo.service';
 import { SecurityModel } from './settings.interface';
 import { securitySchema } from './settings.schema';
 
+const DISCOVERY_RADIUS_OPTIONS = [5, 10, 20, 50];
+
 @Component({
-	imports: [FormField, ButtonModule, PasswordModule, FieldErrorComponent, TranslateDirective],
+	imports: [FormsModule, FormField, ButtonModule, PasswordModule, ToggleSwitchModule, FieldErrorComponent, TranslateDirective],
 	templateUrl: './settings.component.html',
 	styleUrl: './settings.component.scss',
 })
@@ -30,7 +35,15 @@ export class SettingsComponent {
 	readonly languageService = inject(LanguageService);
 	readonly translateService = inject(TranslateService);
 	readonly themeService = inject(ThemeState);
+	readonly geoService = inject(GeoService);
 	private readonly _destroyRef = inject(DestroyRef);
+
+	readonly discoveryRadiusOptions = DISCOVERY_RADIUS_OPTIONS;
+	readonly notificationsEnabled = signal(false);
+
+	setDiscoveryRadius(radiusKm: number): void {
+		this.geoService.setDiscoveryRadiusKm(radiusKm);
+	}
 
 	readonly languageName = computed(() => {
 		const language = this.languageService.getLanguage(this.languageService.language());

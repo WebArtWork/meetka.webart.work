@@ -12,7 +12,7 @@ import {
 	schema,
 	submit,
 } from '@angular/forms/signals';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env';
 import { SpiderComponent } from '@wawjs/ngx-bos';
 import { User, UserService } from '@wawjs/ngx-bos';
@@ -53,6 +53,10 @@ export class SignComponent {
 	private _messageService = inject(MessageService);
 	private _httpService = inject(HttpService);
 	private _router = inject(Router);
+	private _route = inject(ActivatedRoute);
+
+	/** Redirects back to the action/page that required authentication, per the Meetka Phase 1 roadmap. */
+	private readonly _returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
 
 	readonly logo = environment.sign.logo;
 
@@ -176,7 +180,7 @@ export class SignComponent {
 		localStorage.setItem('waw_user', JSON.stringify(user));
 		this.userService.setUser(user);
 		this.userService.get();
-		this._router.navigateByUrl('/profile');
+		this._router.navigateByUrl(this._returnUrl || '/profile');
 	}
 
 	private _handleRequestError(): void {

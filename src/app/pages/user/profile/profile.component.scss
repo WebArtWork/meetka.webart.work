@@ -5,4 +5,10 @@
 	&__logout { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); width: fit-content; margin-top: var(--sp-3); padding: var(--sp-3) var(--sp-5); border: 1px solid transparent; border-radius: var(--radius-btn); background: var(--c-secondary); color: var(--c-text-secondary); font: 600 .875rem/1 var(--ff-base); cursor: pointer; }
 	&__logout:hover { background: var(--c-secondary-hover); }
 	&__logout:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+	&__meetka-fields { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-3); padding-top: var(--sp-3); border-top: 1px solid var(--c-border); }
+	&__meetka-fields label { display: block; font-size: 0.85rem; color: var(--c-text-secondary); margin-bottom: 0.35rem; }
+	&__meets-section { margin-top: var(--sp-4); }
+	&__meets-section h2 { font-size: 1.05rem; margin: 0 0 var(--sp-3); }
+	&__meets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--sp-3); }
+	&__all-meets { display: inline-block; margin-top: var(--sp-3); color: var(--c-primary); }
 }

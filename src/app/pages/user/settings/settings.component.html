@@ -19,6 +19,33 @@
 	</section>
 
 	<section class="settings__section">
+		<h2 class="settings__label" translate>Discovery</h2>
+		<div class="settings__content settings__content--inline settings__theme">
+			<div class="settings__theme-row">
+				<span class="settings__theme-label" translate>Discovery radius</span>
+				<div class="settings__theme-group">
+					@for (radius of discoveryRadiusOptions; track radius) {
+						<button
+							pButton
+							type="button"
+							size="small"
+							[text]="geoService.discoveryRadiusKm() !== radius"
+							(click)="setDiscoveryRadius(radius)"
+						>
+							{{ radius }} km
+						</button>
+					}
+				</div>
+			</div>
+
+			<div class="settings__theme-row">
+				<span class="settings__theme-label" translate>Notifications</span>
+				<p-toggleSwitch [ngModel]="notificationsEnabled()" (ngModelChange)="notificationsEnabled.set($event)" [disabled]="true" />
+			</div>
+		</div>
+	</section>
+
+	<section class="settings__section">
 		<h2 class="settings__label" translate>Theme</h2>
 		<div class="settings__content settings__content--inline settings__theme">
 			<div class="settings__theme-row">
