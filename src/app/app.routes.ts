@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { MetaGuard } from '@wawjs/ngx-core';
 import { adminsGuard, authenticatedGuard, guestGuard } from '@wawjs/ngx-bos';
+import { meetkaRoutes } from './pages/meetka/meetka.routes';
 
 export const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'sign',
+		redirectTo: 'map',
 		pathMatch: 'full',
 	},
 	{
@@ -29,6 +30,19 @@ export const routes: Routes = [
 						(m) => m.routes,
 					),
 			},
+		],
+	},
+	{
+		// Public discovery — no auth guard, so Map/Coffee Shops/Meets stay
+		// reachable without signing in. Personal actions (create/edit a meet,
+		// My Meets) are still gated per-route below.
+		path: '',
+		loadComponent: () =>
+			import('./layouts/user/user.component').then(
+				(m) => m.UserComponent,
+			),
+		children: [
+			...meetkaRoutes,
 		],
 	},
 	{
@@ -136,7 +150,7 @@ export const routes: Routes = [
 	},
 	{
 		path: '**',
-		redirectTo: 'profile',
+		redirectTo: 'map',
 		pathMatch: 'full',
 	},
 ];

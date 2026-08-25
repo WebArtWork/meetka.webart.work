@@ -12,6 +12,9 @@ export const environment = {
 		default: 'https://ngx.webart.work/logo.png',
 		logo: 'https://ngx.webart.work/logo.png',
 	},
+	// TODO: replace with a real Google Maps JS API key (Maps JavaScript API enabled).
+	// Until then, the Map page shows a fallback instead of an interactive map.
+	googleMapsApiKey: '',
 	defaultLanguageCode: 'en',
 	languages: [
 		{ code: 'cs', name: 'Czech', nativeName: '\u010ce\u0161tina' },

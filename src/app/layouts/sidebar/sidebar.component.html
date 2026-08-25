@@ -44,6 +44,15 @@
 
 	<app-nav-icon
 		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('Map')() : ''"
+		[ariaLabel]="translateService.translate('Map')()"
+		(click)="closeIfOverlay()"
+		routerLink="/map"
+		icon="map-marker"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
 		[name]="showNames() ? translateService.translate('Settings')() : ''"
 		[ariaLabel]="translateService.translate('Settings')()"
 		(click)="closeIfOverlay()"

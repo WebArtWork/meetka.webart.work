@@ -1,0 +1,45 @@
+<p-card styleClass="meet-card" (click)="onCardClick()">
+	<ng-template #header>
+		<div class="meet-card__header">
+			<span class="meet-card__date">{{ meet().date }} · {{ meet().startTime }}–{{ meet().endTime }}</span>
+			@if (meet().visibility === 'private') {
+				<p-tag severity="secondary" [value]="translateService.translate('Private')()" />
+			}
+			@if (meet().recurring) {
+				<p-tag severity="info" [value]="translateService.translate('Recurring')()" />
+			}
+		</div>
+	</ng-template>
+
+	<h3 class="meet-card__title">{{ meet().title }}</h3>
+	<p class="meet-card__description">{{ meet().description }}</p>
+
+	<app-interest-chips [interestIds]="meet().interestIds" />
+
+	<div class="meet-card__meta">
+		<span class="meet-card__shop">{{ coffeeShopName() }}</span>
+		@if (distanceKm() != null) {
+			<span class="meet-card__distance">{{ distanceKm() | number: '1.0-1' }} km</span>
+		}
+	</div>
+
+	<div class="meet-card__footer">
+		<span class="meet-card__participants">
+			{{ participantCount() }}@if (meet().participantLimit) { / {{ meet().participantLimit }} }
+			{{ translateService.translate('going')() }}
+		</span>
+
+		@if (currentUserId()) {
+			<button
+				pButton
+				type="button"
+				size="small"
+				[severity]="isGoing() ? 'secondary' : 'primary'"
+				[disabled]="!isGoing() && isFull()"
+				(click)="onGoingClick($event)"
+			>
+				{{ isGoing() ? translateService.translate('Going ON')() : translateService.translate('Going OFF')() }}
+			</button>
+		}
+	</div>
+</p-card>

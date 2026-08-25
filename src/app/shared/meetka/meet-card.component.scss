@@ -1,0 +1,48 @@
+:host {
+	display: block;
+	cursor: pointer;
+}
+
+.meet-card__header {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1rem 0;
+	flex-wrap: wrap;
+}
+
+.meet-card__date {
+	font-size: 0.85rem;
+	color: var(--p-text-muted-color);
+}
+
+.meet-card__title {
+	margin: 0.25rem 0;
+	font-size: 1.05rem;
+}
+
+.meet-card__description {
+	margin: 0 0 0.75rem;
+	color: var(--p-text-muted-color);
+	font-size: 0.9rem;
+}
+
+.meet-card__meta {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.75rem;
+	font-size: 0.85rem;
+	color: var(--p-text-muted-color);
+}
+
+.meet-card__footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 0.75rem;
+}
+
+.meet-card__participants {
+	font-size: 0.85rem;
+	color: var(--p-text-muted-color);
+}

@@ -1,0 +1,28 @@
+<p-card styleClass="coffee-shop-card" (click)="onCardClick()">
+	<ng-template #header>
+		@if (coffeeShop().photos[0]) {
+			<img class="coffee-shop-card__photo" [src]="coffeeShop().photos[0]" [alt]="coffeeShop().name" loading="lazy" />
+		}
+	</ng-template>
+
+	<h3 class="coffee-shop-card__title">{{ coffeeShop().name }}</h3>
+	<p class="coffee-shop-card__address">{{ coffeeShop().address }}</p>
+
+	<app-interest-chips [interestIds]="coffeeShop().interestIds" />
+
+	<div class="coffee-shop-card__meta">
+		@if (distanceKm() != null) {
+			<span>{{ distanceKm() | number: '1.0-1' }} km</span>
+		}
+		<span>{{ upcomingMeetCount() }} {{ translateService.translate('upcoming meets')() }}</span>
+		@if (hasMenu()) {
+			<p-tag severity="success" [value]="translateService.translate('Menu available')()" />
+		}
+	</div>
+
+	<div class="coffee-shop-card__footer">
+		<button pButton type="button" size="small" severity="secondary" (click)="onMapClick($event)">
+			{{ translateService.translate('View on map')() }}
+		</button>
+	</div>
+</p-card>

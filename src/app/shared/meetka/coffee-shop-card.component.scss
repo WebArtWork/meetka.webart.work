@@ -1,0 +1,36 @@
+:host {
+	display: block;
+	cursor: pointer;
+}
+
+.coffee-shop-card__photo {
+	width: 100%;
+	height: 140px;
+	object-fit: cover;
+	border-radius: var(--radius-card, 10px) var(--radius-card, 10px) 0 0;
+}
+
+.coffee-shop-card__title {
+	margin: 0.25rem 0;
+	font-size: 1.05rem;
+}
+
+.coffee-shop-card__address {
+	margin: 0 0 0.75rem;
+	color: var(--p-text-muted-color);
+	font-size: 0.85rem;
+}
+
+.coffee-shop-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+	font-size: 0.85rem;
+	color: var(--p-text-muted-color);
+}
+
+.coffee-shop-card__footer {
+	margin-top: 0.75rem;
+}

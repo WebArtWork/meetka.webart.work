@@ -4,3 +4,5 @@ allowBuilds:
   esbuild: true
   lmdb: false
   msgpackr-extract: false
+minimumReleaseAgeExclude:
+  - '@wawjs/ngx-prime@22.0.2'
