@@ -36,6 +36,13 @@ export const meetkaRoutes: Routes = [
 			import('./meets/meets.component').then((m) => m.MeetsPageComponent),
 	},
 	{
+		path: 'meet/:id',
+		canActivate: [MetaGuard],
+		data: { meta: { title: 'Зустріч' } },
+		loadComponent: () =>
+			import('./meet/meet.component').then((m) => m.MeetPageComponent),
+	},
+	{
 		path: 'my-meets',
 		canActivate: [MetaGuard, authenticatedGuard],
 		data: { meta: { title: 'Мої зустрічі' } },

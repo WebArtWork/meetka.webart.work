@@ -1,0 +1,105 @@
+@if (meet(); as meet) {
+	<div class="meet-page">
+		<div class="meet-page__header">
+			<div class="meet-page__badges">
+				@if (meet.visibility === 'private') {
+					<p-tag severity="secondary" [value]="translateService.translate('Private')()" />
+				}
+				@if (!meet.active) {
+					<p-tag severity="danger" [value]="translateService.translate('Cancelled')()" />
+				}
+			</div>
+
+			<h1 class="meet-page__title">{{ meet.title }}</h1>
+			<p class="meet-page__datetime">{{ meet.date }} · {{ meet.startTime }}–{{ meet.endTime }}</p>
+
+			@if (recurrenceLabel()) {
+				<p class="meet-page__recurrence">
+					<i class="pi pi-refresh"></i>
+					{{ recurrenceLabel() }}
+					— {{ translateService.translate('joining once covers the series; enable Going for each date you plan to attend')() }}
+				</p>
+			}
+
+			<app-interest-chips [interestIds]="meet.interestIds" />
+		</div>
+
+		<p class="meet-page__description">{{ meet.description }}</p>
+
+		@if (coffeeShop(); as shop) {
+			<div class="meet-page__shop" (click)="openCoffeeShop()">
+				<i class="pi pi-map-marker"></i>
+				<span>{{ shop.name }} — {{ shop.address }}</span>
+			</div>
+		}
+
+		<div class="meet-page__actions">
+			<button
+				pButton
+				type="button"
+				[severity]="isGoing() ? 'secondary' : 'primary'"
+				[disabled]="!isGoing() && isFull()"
+				(click)="toggleGoing()"
+			>
+				{{ isGoing() ? translateService.translate('Going ON')() : translateService.translate('Going OFF')() }}
+			</button>
+			<button pButton type="button" severity="secondary" (click)="openCoffeeShop()">
+				{{ translateService.translate('Open Coffee Shop')() }}
+			</button>
+			<button pButton type="button" severity="secondary" (click)="openMenu()">
+				{{ translateService.translate('Open Menu')() }}
+			</button>
+			<button pButton type="button" severity="secondary" (click)="shareMeet()">
+				{{ translateService.translate('Share')() }}
+			</button>
+		</div>
+
+		@if (isOrganizer()) {
+			<div class="meet-page__organizer-controls">
+				<h2>{{ translateService.translate('Organizer controls')() }}</h2>
+				<div class="meet-page__actions">
+					<button pButton type="button" severity="secondary" (click)="editMeet()">
+						{{ translateService.translate('Edit')() }}
+					</button>
+					<button pButton type="button" severity="danger" [disabled]="!meet.active" (click)="cancelMeet()">
+						{{ translateService.translate('Cancel Meet')() }}
+					</button>
+				</div>
+			</div>
+		}
+
+		<section class="meet-page__section">
+			<h2>
+				{{ translateService.translate('Participants')() }}
+				({{ goingParticipants().length }}@if (meet.participantLimit) { / {{ meet.participantLimit }} })
+			</h2>
+
+			<div class="meet-page__participants">
+				@for (participant of goingParticipants(); track participant.userId) {
+					<div class="meet-page__participant">
+						<p-avatar [image]="participant.thumb" shape="circle" />
+						<span>{{ participant.name }}</span>
+						@if (isOrganizer() && participant.userId !== meet.organizerId) {
+							<button
+								type="button"
+								class="meet-page__remove"
+								[attr.aria-label]="translateService.translate('Remove participant')()"
+								(click)="removeParticipant(participant.userId)"
+							>
+								<i class="pi pi-times"></i>
+							</button>
+						}
+					</div>
+				} @empty {
+					<p class="meet-page__empty">{{ translateService.translate('No one going yet — be the first!')() }}</p>
+				}
+			</div>
+		</section>
+
+		<p class="meet-page__organizer">
+			{{ translateService.translate('Organized by')() }} {{ meet.organizerName }}
+		</p>
+	</div>
+} @else {
+	<p class="meet-page__empty">{{ translateService.translate('Meet not found.')() }}</p>
+}
