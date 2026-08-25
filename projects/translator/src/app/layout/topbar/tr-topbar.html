@@ -1,0 +1,37 @@
+<header class="tr-topbar">
+	<span class="tr-topbar__title">NGX Prime Default Translator</span>
+
+	<div class="tr-topbar__actions">
+		<p-select
+			[options]="translationsState.languages"
+			optionLabel="name"
+			optionValue="code"
+			[ngModel]="translationsState.selectedLanguage()"
+			(ngModelChange)="translationsState.selectedLanguage.set($event)"
+			aria-label="Language"
+		/>
+
+		<p-button
+			icon="pi pi-download"
+			[text]="true"
+			[rounded]="true"
+			[disabled]="!canDownloadSelected()"
+			ariaLabel="Download selected language JSON"
+			[pTooltip]="
+				translationsState.isDefaultLanguageSelected()
+					? 'English is the source language — nothing to download'
+					: 'Download translations'
+			"
+			tooltipPosition="bottom"
+			(onClick)="downloadSelectedLanguage()"
+		/>
+
+		<p-button
+			[icon]="dark() ? 'pi pi-sun' : 'pi pi-moon'"
+			[text]="true"
+			[rounded]="true"
+			[ariaLabel]="dark() ? 'Switch to light mode' : 'Switch to dark mode'"
+			(onClick)="toggleDarkMode()"
+		/>
+	</div>
+</header>
