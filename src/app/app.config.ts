@@ -16,7 +16,6 @@ import {
 import { provideNgxCore } from '@wawjs/ngx-core';
 import { provideNgxCrud } from '@wawjs/ngx-crud';
 import { provideNgxHttp } from '@wawjs/ngx-http';
-import { provideNgxMap } from '@wawjs/ngx-map';
 import { provideNgxSocket } from '@wawjs/ngx-socket';
 import { provideNgxTinymce } from '@wawjs/ngx-tinymce';
 import { provideTranslate } from '@wawjs/ngx-translate';
@@ -60,7 +59,6 @@ export const appConfig: ApplicationConfig = {
 		provideNgxCore(wawjsConfig),
 		provideNgxHttp(wawjsConfig),
 		provideNgxCrud(wawjsConfig),
-		provideNgxMap(),
 		provideNgxSocket({ ...wawjsConfig, io }),
 		provideNgxAce({
 			mode: 'text',

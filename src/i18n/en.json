@@ -62,8 +62,8 @@
 	"Private",
 	"Recurring",
 	"going",
-	"Going ON",
-	"Going OFF",
+	"Join",
+	"Leave",
 	"upcoming meets",
 	"Menu available",
 	"View on map",
@@ -173,5 +173,11 @@
 	"Other",
 	"Discovery",
 	"Discovery radius",
-	"Notifications"
+	"Notifications",
+	"Meetka members share interests and show up for real coffee meets.",
+	"Visitor not found.",
+	"Share Meetka",
+	"Scan this code to join Meetka in seconds — no app to install, just sign up and you're in.",
+	"Copy link",
+	"Got a coffee waiting for you? Scan, create your account, and it'll be ready to claim."
 ]

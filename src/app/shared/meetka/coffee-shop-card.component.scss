@@ -3,11 +3,46 @@
 	cursor: pointer;
 }
 
+:host ::ng-deep .coffee-shop-card {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+
+	@media (max-width: 480px) {
+		flex-direction: column;
+	}
+}
+
+:host ::ng-deep .coffee-shop-card .p-card-header {
+	position: relative;
+	overflow: hidden;
+	flex: 0 0 220px;
+	width: 220px;
+	min-height: 140px;
+
+	@media (max-width: 480px) {
+		flex-basis: auto;
+		width: 100%;
+		height: 140px;
+	}
+}
+
+:host ::ng-deep .coffee-shop-card .p-card-body {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
 .coffee-shop-card__photo {
+	position: absolute;
+	inset: 0;
 	width: 100%;
-	height: 140px;
+	height: 100%;
 	object-fit: cover;
-	border-radius: var(--radius-card, 10px) var(--radius-card, 10px) 0 0;
+	border-radius: var(--radius-card, 10px) 0 0 var(--radius-card, 10px);
+
+	@media (max-width: 480px) {
+		border-radius: var(--radius-card, 10px) var(--radius-card, 10px) 0 0;
+	}
 }
 
 .coffee-shop-card__title {
@@ -31,6 +66,3 @@
 	color: var(--p-text-muted-color);
 }
 
-.coffee-shop-card__footer {
-	margin-top: 0.75rem;
-}

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@wawjs/ngx-translate';
 import { MeetsListComponent } from '../../../shared/meetka/meets-list.component';
 
 @Component({
@@ -11,8 +10,6 @@ import { MeetsListComponent } from '../../../shared/meetka/meets-list.component'
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeetsPageComponent {
-	readonly translateService = inject(TranslateService);
-
 	readonly initialCoffeeShopId = signal(
 		inject(ActivatedRoute).snapshot.queryParamMap.get('coffeeShop'),
 	);

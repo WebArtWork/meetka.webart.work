@@ -1,25 +1,26 @@
-.coffee-shops-page__title {
-	margin: 0 0 1rem;
-}
-
-.coffee-shops-page__filters {
+.coffee-shops-page__header {
 	display: flex;
 	flex-wrap: wrap;
+	align-items: center;
 	gap: 0.5rem;
 	margin-bottom: 1rem;
 }
 
-.coffee-shops-page__search {
-	flex: 1 1 220px;
+.coffee-shops-page__title {
+	margin: 0 1rem 0 0;
 }
 
 .coffee-shops-page__interests {
 	min-width: 200px;
 }
 
+.coffee-shops-page__map-link {
+	margin-left: auto;
+}
+
 .coffee-shops-page__grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	grid-template-columns: 1fr;
 	gap: 1rem;
 }
 

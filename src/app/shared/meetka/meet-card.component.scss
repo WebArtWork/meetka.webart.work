@@ -1,4 +1,5 @@
 :host {
+	position: relative;
 	display: block;
 	cursor: pointer;
 }
@@ -29,20 +30,25 @@
 
 .meet-card__meta {
 	display: flex;
-	justify-content: space-between;
+	align-items: center;
+	gap: 0.75rem;
 	margin-top: 0.75rem;
 	font-size: 0.85rem;
 	color: var(--p-text-muted-color);
 }
 
-.meet-card__footer {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-top: 0.75rem;
+.meet-card__going {
+	margin-left: auto;
 }
 
 .meet-card__participants {
-	font-size: 0.85rem;
+	position: absolute;
+	top: 0.75rem;
+	right: 1rem;
+	font-size: 0.8rem;
 	color: var(--p-text-muted-color);
+	background: var(--c-bg-tertiary);
+	padding: 0.15rem 0.6rem;
+	border-radius: var(--radius-pill, 999px);
+	white-space: nowrap;
 }

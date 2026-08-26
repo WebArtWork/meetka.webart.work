@@ -1,78 +1,42 @@
 <div class="meets-list">
-	@if (mode() === 'generic') {
-		<div class="meets-list__filters">
-			<input
-				pInputText
-				class="meets-list__search"
-				[placeholder]="translateService.translate('Search meets...')()"
-				[ngModel]="searchTerm()"
-				(ngModelChange)="searchTerm.set($event)"
-			/>
+	<div class="meets-list__header">
+		@if (title()) {
+			<h1 class="meets-list__title">{{ translateService.translate(title())() }}</h1>
+		}
 
-			<p-multiSelect
-				[options]="interests"
-				optionLabel="label"
-				optionValue="id"
-				[placeholder]="translateService.translate('Interests')()"
-				[ngModel]="selectedInterestIds()"
-				(ngModelChange)="selectedInterestIds.set($event)"
-			/>
+		<app-interests-filter
+			[(selectedInterestIds)]="selectedInterestIds"
+			styleClass="meets-list__interests"
+		/>
 
-			<p-select
-				[options]="coffeeShops()"
-				optionLabel="name"
-				optionValue="id"
-				[showClear]="true"
-				[placeholder]="translateService.translate('Coffee Shops')()"
-				[ngModel]="selectedCoffeeShopId()"
-				(ngModelChange)="selectedCoffeeShopId.set($event)"
-			/>
+		<p-select
+			[options]="coffeeShops()"
+			optionLabel="name"
+			optionValue="id"
+			[showClear]="true"
+			[placeholder]="translateService.translate('Coffee Shops')()"
+			[ngModel]="selectedCoffeeShopId()"
+			(ngModelChange)="selectedCoffeeShopId.set($event)"
+			class="meets-list__coffee-shops"
+		/>
 
-			<p-datepicker
-				[placeholder]="translateService.translate('Date')()"
-				[showIcon]="true"
-				[showClear]="true"
-				[ngModel]="selectedDate()"
-				(ngModelChange)="selectedDate.set($event)"
-			/>
-
-			<p-select
-				[options]="timeframeOptions"
-				optionLabel="label"
-				optionValue="value"
-				[ngModel]="timeframe()"
-				(ngModelChange)="timeframe.set($event)"
-			/>
-
-			<button pButton type="button" (click)="createMeet()">
-				{{ translateService.translate('Create Meet')() }}
-			</button>
-		</div>
-	} @else {
-		<div class="meets-list__tabs">
-			@for (tab of tabs; track tab.key) {
-				<button
-					type="button"
-					class="meets-list__tab"
-					[class.meets-list__tab--active]="activeTab() === tab.key"
-					(click)="activeTab.set(tab.key)"
-				>
-					{{ translateService.translate(tab.label)() }}
-				</button>
-			}
-
-			<button pButton type="button" size="small" class="meets-list__create" (click)="createMeet()">
-				{{ translateService.translate('Create Meet')() }}
-			</button>
-		</div>
-	}
+		<button
+			pButton
+			type="button"
+			class="meets-list__past-toggle"
+			[severity]="showPast() ? 'primary' : 'secondary'"
+			(click)="showPast.set(!showPast())"
+		>
+			{{ translateService.translate('Show past meets')() }}
+		</button>
+	</div>
 
 	<div class="meets-list__grid">
 		@for (meet of meets(); track meet.id) {
 			<app-meet-card
 				[meet]="meet"
 				[coffeeShopName]="coffeeShopName(meet.coffeeShopId)"
-				[currentUserId]="userService.user()?._id ?? null"
+				[currentUserId]="userService.user()._id"
 				(open)="openMeet(meet.id)"
 				(goingToggle)="toggleGoing(meet.id, $event)"
 			/>

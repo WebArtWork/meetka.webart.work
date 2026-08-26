@@ -1,0 +1,23 @@
+<div class="share-page">
+	<header class="share-page__hero">
+		<h1>{{ title() }}</h1>
+		<p>{{ description() }}</p>
+	</header>
+
+	<div class="share-page__qr">
+		<app-qr-code [value]="shareUrl()" [size]="240" />
+	</div>
+
+	<div class="share-page__link">
+		<code>{{ shareUrl() }}</code>
+		<button pButton type="button" severity="secondary" size="small" (click)="copyLink()">
+			{{ translateService.translate('Copy link')() }}
+		</button>
+	</div>
+
+	@if (kind() === 'app') {
+		<p class="share-page__hint">
+			{{ translateService.translate('Got a coffee waiting for you? Scan, create your account, and it\'ll be ready to claim.')() }}
+		</p>
+	}
+</div>

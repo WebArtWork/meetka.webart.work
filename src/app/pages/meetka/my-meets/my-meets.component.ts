@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { TranslateService } from '@wawjs/ngx-translate';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MeetsListComponent } from '../../../shared/meetka/meets-list.component';
 
 @Component({
@@ -9,6 +8,4 @@ import { MeetsListComponent } from '../../../shared/meetka/meets-list.component'
 	styleUrl: './my-meets.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyMeetsPageComponent {
-	readonly translateService = inject(TranslateService);
-}
+export class MyMeetsPageComponent {}

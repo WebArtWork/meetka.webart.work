@@ -41,7 +41,7 @@
 				[disabled]="!isGoing() && isFull()"
 				(click)="toggleGoing()"
 			>
-				{{ isGoing() ? translateService.translate('Going ON')() : translateService.translate('Going OFF')() }}
+				{{ isGoing() ? translateService.translate('Leave')() : translateService.translate('Join')() }}
 			</button>
 			<button pButton type="button" severity="secondary" (click)="openCoffeeShop()">
 				{{ translateService.translate('Open Coffee Shop')() }}

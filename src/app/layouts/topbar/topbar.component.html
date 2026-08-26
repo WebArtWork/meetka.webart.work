@@ -8,9 +8,21 @@
 			class="inline-flex items-center max-md:flex-1 max-md:justify-center"
 		>
 			<app-nav-icon
-				[routerLink]="sidebarToggler() ? '/dashboard' : '/'"
-				[name]="viewport() === 'mobile' ? '' : sidebarToggler() ? translateService.translate('Dashboard')() : ''"
-				[icon]="sidebarToggler() ? 'th-large' : 'home'"
+				routerLink="/coffee-shops"
+				icon="shop"
+				[name]="viewport() === 'mobile' ? '' : translateService.translate('Coffee Shops')()"
+				[ariaLabel]="translateService.translate('Coffee Shops')()"
+			/>
+		</li>
+
+		<li
+			class="inline-flex items-center max-md:flex-1 max-md:justify-center"
+		>
+			<app-nav-icon
+				routerLink="/my-meets"
+				icon="bookmark"
+				[name]="viewport() === 'mobile' ? '' : translateService.translate('My Meets')()"
+				[ariaLabel]="translateService.translate('My Meets')()"
 			/>
 		</li>
 

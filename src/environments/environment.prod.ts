@@ -1,5 +1,5 @@
 export const environment = {
-	roles: [],
+	roles: ['barista'],
 	production: true,
 	appId: 'appId',
 	url: 'https://it.webart.work',
@@ -12,10 +12,7 @@ export const environment = {
 		default: 'https://ngx.webart.work/logo.png',
 		logo: 'https://ngx.webart.work/logo.png',
 	},
-	// TODO: replace with a real Google Maps JS API key (Maps JavaScript API enabled).
-	// Until then, the Map page shows a fallback instead of an interactive map.
-	googleMapsApiKey: '',
-	defaultLanguageCode: 'en',
+	defaultLanguageCode: 'ua',
 	languages: [
 		{ code: 'cs', name: 'Czech', nativeName: '\u010ce\u0161tina' },
 		{ code: 'de', name: 'German', nativeName: 'Deutsch' },

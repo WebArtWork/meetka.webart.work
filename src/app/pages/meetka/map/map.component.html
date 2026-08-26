@@ -1,29 +1,8 @@
 <div class="map-page">
 	<div class="map-page__filters">
-		<input
-			pInputText
-			class="map-page__search"
-			[placeholder]="translateService.translate('Search by area or coffee shop...')()"
-			[ngModel]="searchTerm()"
-			(ngModelChange)="searchTerm.set($event)"
-		/>
-
-		<p-multiSelect
-			[options]="interests"
-			optionLabel="label"
-			optionValue="id"
-			[placeholder]="translateService.translate('Interests')()"
-			[ngModel]="selectedInterestIds()"
-			(ngModelChange)="selectedInterestIds.set($event)"
+		<app-interests-filter
+			[(selectedInterestIds)]="selectedInterestIds"
 			styleClass="map-page__interests"
-		/>
-
-		<p-datepicker
-			[placeholder]="translateService.translate('Date')()"
-			[showIcon]="true"
-			[showClear]="true"
-			[ngModel]="selectedDate()"
-			(ngModelChange)="selectedDate.set($event)"
 		/>
 
 		<button pButton type="button" severity="secondary" (click)="goToCoffeeShops()">
@@ -32,49 +11,11 @@
 	</div>
 
 	<div class="map-page__body">
-		<div class="map-page__map">
-			@if (mapAvailable() === true) {
-				<lib-map
-					[center]="geoService.userLocation()"
-					[zoom]="13"
-					height="100%"
-					width="100%"
-					[markers]="markers()"
-					(markerSelected)="onMarkerSelected($event)"
-				/>
-			} @else if (mapAvailable() === false) {
-				<div class="map-page__map-fallback">
-					<p>{{ translateService.translate('Interactive map is not configured yet. Showing nearby coffee shops as a list instead.')() }}</p>
-				</div>
-			}
-		</div>
-
-		<aside class="map-page__panel">
-			@if (selectedShop(); as shop) {
-				<app-coffee-shop-card
-					[coffeeShop]="shop"
-					[distanceKm]="distanceToShop(shop.id)"
-					[upcomingMeetCount]="selectedShopMeets().length"
-					(open)="openCoffeeShop(shop.id)"
-					(openMap)="openCoffeeShop(shop.id)"
-				/>
-
-				@for (meet of selectedShopMeets(); track meet.id) {
-					<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
-				}
-			} @else {
-				<p class="map-page__hint">{{ translateService.translate('Select a coffee shop marker to preview its meets.')() }}</p>
-
-				@for (shop of filteredShops(); track shop.id) {
-					<app-coffee-shop-card
-						[coffeeShop]="shop"
-						[distanceKm]="distanceToShop(shop.id)"
-						[upcomingMeetCount]="upcomingMeetsByShop().get(shop.id) ?? 0"
-						(open)="openCoffeeShop(shop.id)"
-						(openMap)="selectedShopId.set(shop.id)"
-					/>
-				}
-			}
-		</aside>
+		<app-leaflet-map
+			[center]="geoService.userLocation()"
+			[zoom]="13"
+			[markers]="markers()"
+			(markerSelected)="onMarkerSelected($event)"
+		/>
 	</div>
 </div>

@@ -1,33 +1,15 @@
 <div class="coffee-shops-page">
-	<h1 class="coffee-shops-page__title">{{ translateService.translate('Coffee Shops')() }}</h1>
+	<div class="coffee-shops-page__header">
+		<h1 class="coffee-shops-page__title">{{ translateService.translate('Coffee Shops')() }}</h1>
 
-	<div class="coffee-shops-page__filters">
-		<input
-			pInputText
-			class="coffee-shops-page__search"
-			[placeholder]="translateService.translate('Search by area or coffee shop...')()"
-			[ngModel]="searchTerm()"
-			(ngModelChange)="searchTerm.set($event)"
-		/>
-
-		<p-multiSelect
-			[options]="interests"
-			optionLabel="label"
-			optionValue="id"
-			[placeholder]="translateService.translate('Interests')()"
-			[ngModel]="selectedInterestIds()"
-			(ngModelChange)="selectedInterestIds.set($event)"
+		<app-interests-filter
+			[(selectedInterestIds)]="selectedInterestIds"
 			styleClass="coffee-shops-page__interests"
 		/>
 
-		<button
-			pButton
-			type="button"
-			[severity]="nearbyOnly() ? 'primary' : 'secondary'"
-			(click)="nearbyOnly.set(!nearbyOnly())"
-		>
-			{{ translateService.translate('Nearby')() }}
-		</button>
+		<a pButton routerLink="/map" severity="secondary" size="small" class="coffee-shops-page__map-link">
+			{{ translateService.translate('Map')() }}
+		</a>
 	</div>
 
 	<div class="coffee-shops-page__grid">
@@ -37,7 +19,6 @@
 				[distanceKm]="distanceToShop(shop.location)"
 				[upcomingMeetCount]="upcomingMeetCountByShop().get(shop.id) ?? 0"
 				(open)="openCoffeeShop(shop.id)"
-				(openMap)="openOnMap(shop.id)"
 			/>
 		} @empty {
 			<p class="coffee-shops-page__empty">{{ translateService.translate('No coffee shops match your filters yet.')() }}</p>

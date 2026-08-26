@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { COFFEE_SHOPS } from './meetka.mock-data';
+import { COFFEE_SHOPS } from '@data/meetka/coffee-shops';
 import { CoffeeShop } from './meetka.models';
 
 @Injectable({ providedIn: 'root' })

@@ -42,50 +42,16 @@
 		</a>
 	</div>
 
+	@if (userService.user()._id) {
 	<app-nav-icon
 		[class.sidebar--minimized-icon]="!showNames()"
-		[name]="showNames() ? translateService.translate('Map')() : ''"
-		[ariaLabel]="translateService.translate('Map')()"
+		[name]="showNames() ? translateService.translate('Share My Profile')() : ''"
+		[ariaLabel]="translateService.translate('Share My Profile')()"
 		(click)="closeIfOverlay()"
-		routerLink="/map"
-		icon="map-marker"
+		routerLink="/share-profile"
+		icon="id-card"
 	/>
-
-	<app-nav-icon
-		[class.sidebar--minimized-icon]="!showNames()"
-		[name]="showNames() ? translateService.translate('Coffee Shops')() : ''"
-		[ariaLabel]="translateService.translate('Coffee Shops')()"
-		(click)="closeIfOverlay()"
-		routerLink="/coffee-shops"
-		icon="shop"
-	/>
-
-	<app-nav-icon
-		[class.sidebar--minimized-icon]="!showNames()"
-		[name]="showNames() ? translateService.translate('Meets')() : ''"
-		[ariaLabel]="translateService.translate('Meets')()"
-		(click)="closeIfOverlay()"
-		routerLink="/meets"
-		icon="calendar"
-	/>
-
-	<app-nav-icon
-		[class.sidebar--minimized-icon]="!showNames()"
-		[name]="showNames() ? translateService.translate('My Meets')() : ''"
-		[ariaLabel]="translateService.translate('My Meets')()"
-		(click)="closeIfOverlay()"
-		routerLink="/my-meets"
-		icon="bookmark"
-	/>
-
-	<app-nav-icon
-		[class.sidebar--minimized-icon]="!showNames()"
-		[name]="showNames() ? translateService.translate('Settings')() : ''"
-		[ariaLabel]="translateService.translate('Settings')()"
-		(click)="closeIfOverlay()"
-		routerLink="/settings"
-		icon="cog"
-	/>
+	}
 
 	<hr class="my-2 border-0 border-t-2 border-t-[var(--c-text-primary)]" />
 
@@ -128,4 +94,37 @@
 
 	<hr class="my-2 border-0 border-t-2 border-t-[var(--c-text-primary)]" />
 	}
+
+	@if (userService.role('barista') || userService.role('admin')) {
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('Visitors')() : ''"
+		[ariaLabel]="translateService.translate('Visitors')()"
+		(click)="closeIfOverlay()"
+		routerLink="/barista/visitors"
+		icon="address-book"
+	/>
+
+	<hr class="my-2 border-0 border-t-2 border-t-[var(--c-text-primary)]" />
+	}
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('Settings')() : ''"
+		[ariaLabel]="translateService.translate('Settings')()"
+		(click)="closeIfOverlay()"
+		routerLink="/settings"
+		icon="cog"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('Share Meetka')() : ''"
+		[ariaLabel]="translateService.translate('Share Meetka')()"
+		(click)="closeIfOverlay()"
+		routerLink="/share"
+		icon="qrcode"
+	/>
+
+	<hr class="my-2 border-0 border-t-2 border-t-[var(--c-text-primary)]" />
 </aside>

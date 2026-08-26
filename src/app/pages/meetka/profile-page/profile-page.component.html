@@ -1,0 +1,63 @@
+@if (person(); as person) {
+	<div class="profile-page">
+		<div class="profile-page__header">
+			<img class="profile-page__photo" [src]="person.photo" [alt]="person.name" />
+			<div>
+				<h1 class="profile-page__name">{{ person.name }}</h1>
+				@if (barista(); as barista) {
+					@if (coffeeShop(); as shop) {
+						<button type="button" class="profile-page__shop" (click)="openCoffeeShop()">{{ shop.name }}</button>
+					}
+					<p-tag
+						[severity]="barista.available ? 'success' : 'secondary'"
+						[value]="barista.available ? translateService.translate('Available now')() : translateService.translate('Not available')()"
+					/>
+				}
+			</div>
+		</div>
+
+		<p class="profile-page__bio">{{ person.bio }}</p>
+
+		<app-interest-chips [interestIds]="person.interestIds" />
+
+		@if (barista(); as barista) {
+			@if (barista.tipLinks.length) {
+				<section class="profile-page__section">
+					<h2>{{ translateService.translate('Tip')() }}</h2>
+					<div class="profile-page__links">
+						@for (link of barista.tipLinks; track link.url) {
+							<a [href]="link.url" target="_blank" rel="noopener">{{ link.label }}</a>
+						}
+					</div>
+				</section>
+			}
+		}
+
+		@if (person.socialLinks.length) {
+			<section class="profile-page__section">
+				<h2>{{ translateService.translate('Social')() }}</h2>
+				<div class="profile-page__links">
+					@for (link of person.socialLinks; track link.url) {
+						<a [href]="link.url" target="_blank" rel="noopener">{{ link.label }}</a>
+					}
+				</div>
+			</section>
+		}
+
+		<button pButton type="button" severity="secondary" (click)="shareProfile()">
+			{{ translateService.translate('Share profile')() }}
+		</button>
+
+		<p class="profile-page__footnote">
+			@if (barista()) {
+				{{ translateService.translate('Baristas are part of the Meetka community — helping visitors find their meet and feel welcome.')() }}
+			} @else {
+				{{ translateService.translate('Meetka members share interests and show up for real coffee meets.')() }}
+			}
+		</p>
+	</div>
+} @else {
+	<p class="profile-page__empty">
+		{{ kind() === 'barista' ? translateService.translate('Barista not found.')() : translateService.translate('Visitor not found.')() }}
+	</p>
+}

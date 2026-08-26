@@ -10,10 +10,7 @@
 	flex-wrap: wrap;
 	gap: 0.5rem;
 	align-items: center;
-}
-
-.map-page__search {
-	flex: 1 1 220px;
+	justify-content: space-between;
 }
 
 .map-page__interests {
@@ -21,46 +18,10 @@
 }
 
 .map-page__body {
-	display: grid;
-	grid-template-columns: 1fr 340px;
-	gap: 1rem;
-	min-height: 480px;
-	flex: 1;
-}
-
-@media (max-width: 900px) {
-	.map-page__body {
-		grid-template-columns: 1fr;
-	}
-}
-
-.map-page__map {
 	position: relative;
-	min-height: 420px;
+	flex: 1;
+	min-height: 480px;
 	border-radius: var(--radius-card, 10px);
 	overflow: hidden;
 	background: var(--c-bg-tertiary);
-}
-
-.map-page__map-fallback {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	padding: 2rem;
-	text-align: center;
-	color: var(--c-text-muted);
-}
-
-.map-page__panel {
-	display: flex;
-	flex-direction: column;
-	gap: 0.75rem;
-	overflow-y: auto;
-	max-height: 640px;
-}
-
-.map-page__hint {
-	color: var(--c-text-muted);
-	font-size: 0.85rem;
 }

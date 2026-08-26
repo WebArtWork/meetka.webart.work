@@ -1,4 +1,9 @@
 <p-card styleClass="meet-card" (click)="onCardClick()">
+	<span class="meet-card__participants">
+		{{ participantCount() }}@if (meet().participantLimit) { / {{ meet().participantLimit }} }
+		{{ translateService.translate('going')() }}
+	</span>
+
 	<ng-template #header>
 		<div class="meet-card__header">
 			<span class="meet-card__date">{{ meet().date }} · {{ meet().startTime }}–{{ meet().endTime }}</span>
@@ -21,24 +26,18 @@
 		@if (distanceKm() != null) {
 			<span class="meet-card__distance">{{ distanceKm() | number: '1.0-1' }} km</span>
 		}
-	</div>
-
-	<div class="meet-card__footer">
-		<span class="meet-card__participants">
-			{{ participantCount() }}@if (meet().participantLimit) { / {{ meet().participantLimit }} }
-			{{ translateService.translate('going')() }}
-		</span>
 
 		@if (currentUserId()) {
 			<button
 				pButton
 				type="button"
 				size="small"
+				class="meet-card__going"
 				[severity]="isGoing() ? 'secondary' : 'primary'"
 				[disabled]="!isGoing() && isFull()"
 				(click)="onGoingClick($event)"
 			>
-				{{ isGoing() ? translateService.translate('Going ON')() : translateService.translate('Going OFF')() }}
+				{{ isGoing() ? translateService.translate('Leave')() : translateService.translate('Join')() }}
 			</button>
 		}
 	</div>

@@ -6,12 +6,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '../..');
 const outputDirs = [path.join(rootDir, 'dist/app/browser')];
 
-// Ngx BOS is an authenticated CRM SPA, not a public/indexable site (see projects/ngx-bos/ai/architecture.md
-// "SPA Contract"). Only the root/sign-in page is discoverable — everything past sign-in requires a
-// real session and must stay out of search results. CNAME holds the real per-org domain once this
-// template is distributed to an org repo (see documentation/org-branches.md); it doesn't exist in the
-// source workspace itself, hence the fallback.
+// Unlike a typical authenticated CRM SPA, Meetka's discovery pages (map, coffee shops, meets,
+// barista/coffee-shop landing pages) are public and meant to be indexed — see the routing comment
+// in src/app/app.routes.ts ("Public discovery — no auth guard"). Only personal/admin routes
+// (dashboard, profile, settings, my-meets, meet/mutate, admin/*) require a session and stay out of
+// search results. CNAME holds the real domain once deployed; it doesn't exist in the source
+// workspace itself, hence the fallback.
 const siteUrl = `https://${await readDomain()}`;
+
+// Static public routes only — per-entity pages (coffee-shop/:id, barista/:id, meet/:id) are mock
+// data today and will come from a real backend; add them here once that API exists.
+const PUBLIC_ROUTES = [
+	'/',
+	'/map',
+	'/coffee-shops',
+	'/meets',
+	'/for-coffee-shops',
+	'/for-baristas',
+	'/sign',
+];
 
 await Promise.all(
 	outputDirs.map(async (outputDir) => {
@@ -24,21 +37,31 @@ await Promise.all(
 function buildSitemap(siteUrl) {
 	const lastmod = new Date().toISOString().slice(0, 10);
 
+	const urls = PUBLIC_ROUTES.map(
+		(route) => `	<url>
+		<loc>${escapeXml(siteUrl + route)}</loc>
+		<lastmod>${lastmod}</lastmod>
+	</url>`,
+	).join('\n');
+
 	return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	<url>
-		<loc>${escapeXml(siteUrl)}/sign</loc>
-		<lastmod>${lastmod}</lastmod>
-	</url>
+${urls}
 </urlset>
 `;
 }
 
 function buildRobots(siteUrl) {
+	const allow = PUBLIC_ROUTES.map((route) => `Allow: ${route === '/' ? '/$' : route + '$'}`).join('\n');
+
 	return `User-agent: *
-Allow: /$
-Allow: /sign$
-Disallow: /
+${allow}
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /settings
+Disallow: /my-meets
+Disallow: /meet/mutate
+Disallow: /admin
 
 Sitemap: ${siteUrl}/sitemap.xml
 `;

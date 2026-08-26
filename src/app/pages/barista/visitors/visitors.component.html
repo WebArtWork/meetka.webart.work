@@ -1,0 +1,56 @@
+<div class="barista-visitors">
+	<h1 class="barista-visitors__title">{{ translateService.translate('Visitors')() }}</h1>
+
+	<div class="barista-visitors__form">
+		<input
+			pInputText
+			class="barista-visitors__name-input"
+			[placeholder]="translateService.translate('Visitor name...')()"
+			[ngModel]="newName()"
+			(ngModelChange)="newName.set($event)"
+		/>
+
+		<textarea
+			pTextarea
+			rows="1"
+			autoResize
+			class="barista-visitors__note-input"
+			[placeholder]="translateService.translate('Note (optional)...')()"
+			[ngModel]="newNote()"
+			(ngModelChange)="newNote.set($event)"
+		></textarea>
+
+		<button pButton type="button" [disabled]="!newName().trim()" (click)="addVisitor()">
+			{{ translateService.translate('Add Visitor')() }}
+		</button>
+	</div>
+
+	<div class="barista-visitors__list">
+		@for (entry of visitors(); track entry.id) {
+			<div class="barista-visitors__item">
+				<span class="barista-visitors__name">{{ entry.name }}</span>
+
+				<textarea
+					pTextarea
+					rows="1"
+					autoResize
+					class="barista-visitors__note"
+					[placeholder]="translateService.translate('Add a note...')()"
+					[ngModel]="entry.note"
+					(ngModelChange)="updateNote(entry.id, $event)"
+				></textarea>
+
+				<button
+					type="button"
+					class="barista-visitors__remove"
+					[attr.aria-label]="translateService.translate('Remove visitor')()"
+					(click)="removeVisitor(entry.id)"
+				>
+					<i class="pi pi-times"></i>
+				</button>
+			</div>
+		} @empty {
+			<p class="barista-visitors__empty">{{ translateService.translate('No visitors yet — add the first one.')() }}</p>
+		}
+	</div>
+</div>

@@ -12,7 +12,8 @@
 		"paths": {
 			"@env": ["src/environments/environment"],
 			"@layout/*": ["src/app/layouts/*"],
-			"@meetka/*": ["src/app/meetka/*"]
+			"@meetka/*": ["src/app/meetka/*"],
+			"@data/*": ["src/data/*"]
 		},
 		"experimentalDecorators": true,
 		"noImplicitOverride": true,

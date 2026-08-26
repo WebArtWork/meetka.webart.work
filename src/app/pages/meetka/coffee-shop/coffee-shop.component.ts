@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TagModule } from '@wawjs/ngx-prime/tag';
 import { MessageService } from '@wawjs/ngx-prime/api';
+import { MetaService } from '@wawjs/ngx-core';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
@@ -12,6 +13,7 @@ import { MeetsService } from '../../../meetka/meets.service';
 import { BaristasService } from '../../../meetka/baristas.service';
 import { InterestChipsComponent } from '../../../shared/meetka/interest-chips.component';
 import { MeetCardComponent } from '../../../shared/meetka/meet-card.component';
+import { meetkaSeoImage } from '../meetka.seo';
 
 @Component({
 	selector: 'app-coffee-shop',
@@ -26,6 +28,7 @@ export class CoffeeShopPageComponent {
 	private readonly _meetsService = inject(MeetsService);
 	private readonly _baristasService = inject(BaristasService);
 	private readonly _messageService = inject(MessageService);
+	private readonly _metaService = inject(MetaService);
 	readonly userService = inject(UserService);
 	readonly translateService = inject(TranslateService);
 
@@ -36,6 +39,18 @@ export class CoffeeShopPageComponent {
 
 	readonly shop = computed(() => this._coffeeShopsService.get(this._id()));
 	readonly baristas = computed(() => this._baristasService.byCoffeeShop(this._id()));
+
+	constructor() {
+		effect(() => {
+			const shop = this.shop();
+			if (!shop) return;
+			this._metaService.applyMeta({
+				title: shop.name,
+				description: shop.description,
+				image: shop.photos[0] ?? meetkaSeoImage,
+			});
+		});
+	}
 
 	readonly upcomingMeets = computed(() => {
 		const today = new Date().toISOString().slice(0, 10);

@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { BARISTA_PROFILES } from './meetka.mock-data';
+import { BARISTA_PROFILES } from '@data/meetka/baristas';
 import { BaristaProfile } from './meetka.models';
 
 @Injectable({ providedIn: 'root' })

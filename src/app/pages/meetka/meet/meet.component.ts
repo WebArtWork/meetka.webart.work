@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
@@ -6,11 +6,13 @@ import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TagModule } from '@wawjs/ngx-prime/tag';
 import { AvatarModule } from '@wawjs/ngx-prime/avatar';
 import { MessageService } from '@wawjs/ngx-prime/api';
+import { MetaService } from '@wawjs/ngx-core';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
 import { MeetsService } from '../../../meetka/meets.service';
 import { InterestChipsComponent } from '../../../shared/meetka/interest-chips.component';
+import { meetkaSeoImage } from '../meetka.seo';
 
 const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -26,6 +28,7 @@ export class MeetPageComponent {
 	private readonly _coffeeShopsService = inject(CoffeeShopsService);
 	private readonly _meetsService = inject(MeetsService);
 	private readonly _messageService = inject(MessageService);
+	private readonly _metaService = inject(MetaService);
 	readonly userService = inject(UserService);
 	readonly translateService = inject(TranslateService);
 
@@ -39,6 +42,18 @@ export class MeetPageComponent {
 		const meet = this.meet();
 		return meet ? this._coffeeShopsService.get(meet.coffeeShopId) : undefined;
 	});
+
+	constructor() {
+		effect(() => {
+			const meet = this.meet();
+			if (!meet) return;
+			this._metaService.applyMeta({
+				title: meet.title,
+				description: meet.description,
+				image: this.coffeeShop()?.photos[0] ?? meetkaSeoImage,
+			});
+		});
+	}
 
 	readonly currentUserId = computed(() => this.userService.user()?._id ?? '');
 	readonly isOrganizer = computed(() => {

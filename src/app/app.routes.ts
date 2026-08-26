@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import { MetaGuard } from '@wawjs/ngx-core';
 import { adminsGuard, authenticatedGuard, guestGuard } from '@wawjs/ngx-bos';
 import { meetkaRoutes } from './pages/meetka/meetka.routes';
+import { meetkaSeoImage } from './pages/meetka/meetka.seo';
+import { baristaRoutes } from './pages/barista/barista.routes';
+import { baristaGuard } from './pages/barista/barista.guard';
 
 export const routes: Routes = [
 	{
@@ -23,6 +26,8 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Вхід',
+						description: 'Увійди в Meetka, щоб створювати зустрічі та зберігати улюблені кав\'ярні.',
+						image: meetkaSeoImage,
 					},
 				},
 				loadChildren: () =>
@@ -31,6 +36,18 @@ export const routes: Routes = [
 					),
 			},
 		],
+	},
+	{
+		// Barista tools, gated to the `barista` role (admins too). Registered
+		// ahead of the public discovery block below so `barista/visitors`
+		// doesn't get swallowed by that block's `barista/:id` profile route.
+		path: 'barista',
+		canActivate: [baristaGuard],
+		loadComponent: () =>
+			import('./layouts/user/user.component').then(
+				(m) => m.UserComponent,
+			),
+		children: [...baristaRoutes],
 	},
 	{
 		// Public discovery — no auth guard, so Map/Coffee Shops/Meets stay
@@ -43,6 +60,25 @@ export const routes: Routes = [
 			),
 		children: [
 			...meetkaRoutes,
+			{
+				// Unlike dashboard/profile, Settings has anonymous-friendly options
+				// (theme, language, discovery radius) — no auth guard here.
+				// SettingsComponent itself hides the auth-only bits (change
+				// password, logout) when there's no signed-in user.
+				path: 'settings',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Мої налаштування',
+						description: 'Налаштування акаунта Meetka.',
+						image: meetkaSeoImage,
+					},
+				},
+				loadChildren: () =>
+					import('./pages/user/settings/settings.routes').then(
+						(m) => m.routes,
+					),
+			},
 		],
 	},
 	{
@@ -59,6 +95,9 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Панель',
+						description: 'Особиста панель користувача Meetka.',
+						image: meetkaSeoImage,
+						index: false,
 					},
 				},
 				loadChildren: () =>
@@ -72,23 +111,13 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Мій профіль',
+						description: 'Керуй своїм профілем та інтересами в Meetka.',
+						image: meetkaSeoImage,
+						index: false,
 					},
 				},
 				loadChildren: () =>
 					import('./pages/user/profile/profile.routes').then(
-						(m) => m.routes,
-					),
-			},
-			{
-				path: 'settings',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Мої налаштування',
-					},
-				},
-				loadChildren: () =>
-					import('./pages/user/settings/settings.routes').then(
 						(m) => m.routes,
 					),
 			},
@@ -108,6 +137,9 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Користувачі',
+						description: 'Керування користувачами Meetka.',
+						image: meetkaSeoImage,
+						index: false,
 					},
 				},
 				loadChildren: () =>
@@ -119,6 +151,9 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Клієнти',
+						description: 'Керування клієнтами Meetka.',
+						image: meetkaSeoImage,
+						index: false,
 					},
 				},
 				loadChildren: () =>
@@ -130,6 +165,9 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Форми',
+						description: 'Керування формами Meetka.',
+						image: meetkaSeoImage,
+						index: false,
 					},
 				},
 				loadChildren: () =>
@@ -141,6 +179,9 @@ export const routes: Routes = [
 				data: {
 					meta: {
 						title: 'Форми',
+						description: 'Керування формами Meetka.',
+						image: meetkaSeoImage,
+						index: false,
 					},
 				},
 				loadChildren: () =>
