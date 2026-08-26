@@ -127,13 +127,13 @@ export class MeetMutateComponent {
 		if (this.isEditMode && this._editingId) {
 			this._meetsService.update(this._editingId, draft);
 			this._messageService.add({ severity: 'success', detail: this.translateService.translate('Meet updated')() });
-			this._router.navigate(['/meet', this._editingId]);
+			this._router.navigate(['/meet'], { queryParams: { id: this._editingId } });
 			return;
 		}
 
 		const created = this._meetsService.create(draft, user._id, user.name ?? '', user.thumb ?? 'default.png');
 		this._messageService.add({ severity: 'success', detail: this.translateService.translate('Meet created')() });
-		this._router.navigate(['/meet', created.id]);
+		this._router.navigate(['/meet'], { queryParams: { id: created.id } });
 	}
 
 	deleteMeet(): void {
@@ -145,7 +145,7 @@ export class MeetMutateComponent {
 
 	cancel(): void {
 		if (this.isEditMode && this._editingId) {
-			this._router.navigate(['/meet', this._editingId]);
+			this._router.navigate(['/meet'], { queryParams: { id: this._editingId } });
 			return;
 		}
 		this._router.navigate(['/meets']);

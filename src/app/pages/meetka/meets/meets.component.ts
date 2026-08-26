@@ -10,7 +10,10 @@ import { MeetsListComponent } from '../../../shared/meetka/meets-list.component'
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeetsPageComponent {
+	private readonly _route = inject(ActivatedRoute);
+
 	readonly initialCoffeeShopId = signal(
-		inject(ActivatedRoute).snapshot.queryParamMap.get('coffeeShop'),
+		this._route.snapshot.queryParamMap.get('coffeeShop'),
 	);
+	readonly todayOnly = signal(!!this._route.snapshot.data['todayOnly']);
 }

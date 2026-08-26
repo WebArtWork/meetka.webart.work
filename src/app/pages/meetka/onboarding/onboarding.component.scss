@@ -1,0 +1,64 @@
+.onboarding-page {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	max-width: 480px;
+	margin: 0 auto;
+	padding: 2rem 0;
+}
+
+.onboarding-page__header {
+	text-align: center;
+
+	h1 {
+		margin: 0 0 0.5rem;
+	}
+}
+
+.onboarding-page__hint {
+	color: var(--c-text-muted);
+	font-size: 0.9rem;
+}
+
+.onboarding-page__form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.onboarding-page__photo {
+	width: 96px;
+	height: 96px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 2px dashed var(--c-border);
+	background: var(--c-bg-secondary);
+	padding: 0;
+	cursor: pointer;
+	display: grid;
+	place-items: center;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&--empty {
+		color: var(--c-text-muted);
+		font-size: 1.5rem;
+	}
+
+	&:hover {
+		border-color: var(--c-primary);
+	}
+}
+
+.onboarding-page__file-input {
+	display: none;
+}
+
+.onboarding-page__field {
+	width: 100%;
+}

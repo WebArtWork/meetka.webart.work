@@ -20,6 +20,7 @@ import { INTERESTS } from '../../meetka/meetka.interests';
 			[placeholder]="translateService.translate('Interests')()"
 			[ngModel]="selectedInterestIds()"
 			(ngModelChange)="selectedInterestIds.set($event)"
+			appendTo="body"
 			[styleClass]="styleClass()"
 		/>
 	`,

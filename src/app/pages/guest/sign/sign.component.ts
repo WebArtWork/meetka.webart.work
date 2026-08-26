@@ -14,7 +14,6 @@ import {
 } from '@angular/forms/signals';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '@env';
-import { SpiderComponent } from '@wawjs/ngx-bos';
 import { User, UserService } from '@wawjs/ngx-bos';
 import { HttpService } from '@wawjs/ngx-http';
 import { MessageService } from '@wawjs/ngx-prime/api';
@@ -36,7 +35,6 @@ const signSchema = schema<SignModel>((path) => {
 
 @Component({
 	imports: [
-		SpiderComponent,
 		FormField,
 		ButtonModule,
 		InputTextModule,
@@ -58,7 +56,7 @@ export class SignComponent {
 	/** Redirects back to the action/page that required authentication, per the Meetka Phase 1 roadmap. */
 	private readonly _returnUrl = this._route.snapshot.queryParamMap.get('returnUrl');
 
-	readonly logo = environment.sign.logo;
+	readonly logo = environment.sign.logo || 'logo.png';
 
 	// Signal form model
 	signModel = signal<SignModel>({

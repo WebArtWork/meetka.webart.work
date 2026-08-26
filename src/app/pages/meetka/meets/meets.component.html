@@ -1,3 +1,7 @@
 <div class="meets-page">
-	<app-meets-list title="Meets" [initialCoffeeShopId]="initialCoffeeShopId()" />
+	<app-meets-list
+		[title]="todayOnly() ? 'Today\'s Meets' : 'Meets'"
+		[initialCoffeeShopId]="initialCoffeeShopId()"
+		[todayOnly]="todayOnly()"
+	/>
 </div>

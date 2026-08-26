@@ -1,0 +1,72 @@
+<div class="onboarding-page">
+	<header class="onboarding-page__header">
+		<h1 translate>Новий учасник</h1>
+		<p class="onboarding-page__hint" translate>
+			Швидко прийми нового учасника: додай фото, ім'я та інтереси.
+		</p>
+	</header>
+
+	<form
+		(submit)="wFormSubmit(); $event.preventDefault()"
+		class="onboarding-page__form"
+	>
+		<button
+			type="button"
+			class="onboarding-page__photo"
+			[class.onboarding-page__photo--empty]="!photo()"
+			(click)="openPhotoPicker()"
+			[attr.aria-label]="translateService.translate('Обрати фото')()"
+		>
+			@if (photo(); as photoSrc) {
+			<img
+				[src]="photoSrc"
+				[alt]="translateService.translate('Фото учасника')()"
+			/>
+			} @else {
+			<i class="pi pi-camera"></i>
+			}
+		</button>
+		<input
+			#fileInput
+			type="file"
+			accept="image/*"
+			capture="environment"
+			class="onboarding-page__file-input"
+			(change)="onPhotoSelected($event)"
+		/>
+
+		<div class="onboarding-page__field">
+			<input
+				pInputText
+				class="w-full"
+				[placeholder]="translateService.translate('Ім\'я...')()"
+				[formField]="nameField"
+				autofocus
+			/>
+			<app-field-error [field]="nameField" />
+		</div>
+
+		<div class="onboarding-page__field">
+			<textarea
+				pTextarea
+				class="w-full"
+				rows="3"
+				[placeholder]="translateService.translate('Пару слів про учасника...')()"
+				[formField]="bioField"
+			></textarea>
+		</div>
+
+		<div class="onboarding-page__field">
+			<app-interests-filter [(selectedInterestIds)]="interestIds" />
+		</div>
+
+		<button
+			pButton
+			type="submit"
+			[disabled]="isSubmitting()"
+			class="w-full"
+		>
+			{{ translateService.translate('Прийняти учасника')() }}
+		</button>
+	</form>
+</div>

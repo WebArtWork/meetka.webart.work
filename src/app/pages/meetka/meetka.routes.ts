@@ -5,12 +5,29 @@ import { meetkaSeoImage } from './meetka.seo';
 
 export const meetkaRoutes: Routes = [
 	{
+		path: '',
+		pathMatch: 'full',
+		canActivate: [MetaGuard],
+		data: {
+			todayOnly: true,
+			meta: {
+				title: 'Сьогоднішні зустрічі',
+				description:
+					"Публічні зустрічі за інтересами у кав'ярнях-партнерах Meetka сьогодні.",
+				image: meetkaSeoImage,
+			},
+		},
+		loadComponent: () =>
+			import('./meets/meets.component').then((m) => m.MeetsPageComponent),
+	},
+	{
 		path: 'map',
 		canActivate: [MetaGuard],
 		data: {
 			meta: {
 				title: 'Мапа',
-				description: 'Знаходь кав\'ярні та зустрічі поруч на інтерактивній мапі Meetka.',
+				description:
+					"Знаходь кав'ярні та зустрічі поруч на інтерактивній мапі Meetka.",
 				image: meetkaSeoImage,
 			},
 		},
@@ -23,7 +40,8 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Кавʼярні',
-				description: 'Перелік кав\'ярень-партнерів Meetka: адреси, меню та найближчі зустрічі.',
+				description:
+					"Перелік кав'ярень-партнерів Meetka: адреси, меню та найближчі зустрічі.",
 				image: meetkaSeoImage,
 			},
 		},
@@ -39,7 +57,8 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Кавʼярня',
-				description: 'Деталі кав\'ярні: адреса, графік роботи, меню та бариста.',
+				description:
+					"Деталі кав'ярні: адреса, графік роботи, меню та бариста.",
 				image: meetkaSeoImage,
 			},
 		},
@@ -54,7 +73,8 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Зустрічі',
-				description: 'Публічні зустрічі за інтересами у кав\'ярнях-партнерах Meetka.',
+				description:
+					"Публічні зустрічі за інтересами у кав'ярнях-партнерах Meetka.",
 				image: meetkaSeoImage,
 			},
 		},
@@ -78,8 +98,10 @@ export const meetkaRoutes: Routes = [
 			),
 	},
 	{
+		// Meet identity comes via the `id` query param (?id=...), not a path
+		// segment — meets are loaded from the API by id, not a static slug.
 		// Title/description/image are overridden per meet by MeetPageComponent via MetaService.applyMeta().
-		path: 'meet/:id',
+		path: 'meet',
 		canActivate: [MetaGuard],
 		data: {
 			meta: {
@@ -98,7 +120,7 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Меню',
-				description: 'Меню кав\'ярні: напої, десерти та ціни.',
+				description: "Меню кав'ярні: напої, десерти та ціни.",
 				image: meetkaSeoImage,
 			},
 		},
@@ -111,7 +133,8 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Мої зустрічі',
-				description: 'Зустрічі, які ти організував(-ла) або на які записаний(-а).',
+				description:
+					'Зустрічі, які ти організував(-ла) або на які записаний(-а).',
 				image: meetkaSeoImage,
 				index: false,
 			},
@@ -127,7 +150,8 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Для кавʼярень',
-				description: 'Приєднай свою кав\'ярню до Meetka та приваблюй нових відвідувачів.',
+				description:
+					"Приєднай свою кав'ярню до Meetka та приваблюй нових відвідувачів.",
 				image: meetkaSeoImage,
 			},
 		},
@@ -142,7 +166,8 @@ export const meetkaRoutes: Routes = [
 		data: {
 			meta: {
 				title: 'Для баристів',
-				description: 'Стань бариста Meetka: знайомся з відвідувачами та веди свої зустрічі.',
+				description:
+					'Стань бариста Meetka: знайомся з відвідувачами та веди свої зустрічі.',
 				image: meetkaSeoImage,
 			},
 		},
@@ -176,7 +201,8 @@ export const meetkaRoutes: Routes = [
 			profileKind: 'visitor',
 			meta: {
 				title: 'Відвідувач',
-				description: 'Профіль відвідувача Meetka: інтереси та зустрічі.',
+				description:
+					'Профіль відвідувача Meetka: інтереси та зустрічі.',
 				image: meetkaSeoImage,
 			},
 		},
@@ -192,7 +218,8 @@ export const meetkaRoutes: Routes = [
 			shareKind: 'app',
 			meta: {
 				title: 'Поділитися Meetka',
-				description: 'Заскануй QR-код, щоб приєднатися до Meetka за кілька секунд.',
+				description:
+					'Заскануй QR-код, щоб приєднатися до Meetka за кілька секунд.',
 				image: meetkaSeoImage,
 			},
 		},
@@ -206,12 +233,28 @@ export const meetkaRoutes: Routes = [
 			shareKind: 'profile',
 			meta: {
 				title: 'Поділитися профілем',
-				description: 'Заскануй QR-код, щоб відкрити мій профіль Meetka.',
+				description:
+					'Заскануй QR-код, щоб відкрити мій профіль Meetka.',
 				image: meetkaSeoImage,
 				index: false,
 			},
 		},
 		loadComponent: () =>
 			import('./share/share.component').then((m) => m.SharePageComponent),
+	},
+	{
+		path: 'onboarding',
+		canActivate: [MetaGuard],
+		data: {
+			meta: {
+				title: 'Новий учасник',
+				description: 'Швидко прийми нового учасника Meetka.',
+				image: meetkaSeoImage,
+			},
+		},
+		loadComponent: () =>
+			import('./onboarding/onboarding.component').then(
+				(m) => m.OnboardingPageComponent,
+			),
 	},
 ];

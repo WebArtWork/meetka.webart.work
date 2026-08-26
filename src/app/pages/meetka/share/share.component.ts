@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+	ChangeDetectionStrategy,
+	Component,
+	computed,
+	inject,
+} from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
@@ -13,7 +18,7 @@ export type ShareKind = 'app' | 'profile';
 
 @Component({
 	selector: 'app-share',
-	imports: [ButtonModule, QrCodeComponent],
+	imports: [ButtonModule, QrCodeComponent, RouterLink],
 	templateUrl: './share.component.html',
 	styleUrl: './share.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,15 +30,22 @@ export class SharePageComponent {
 	readonly translateService = inject(TranslateService);
 
 	readonly kind = toSignal(
-		this._activatedRoute.data.pipe(map((data) => (data['shareKind'] as ShareKind) ?? 'app')),
-		{ initialValue: (this._activatedRoute.snapshot.data['shareKind'] as ShareKind) ?? 'app' },
+		this._activatedRoute.data.pipe(
+			map((data) => (data['shareKind'] as ShareKind) ?? 'app'),
+		),
+		{
+			initialValue:
+				(this._activatedRoute.snapshot.data[
+					'shareKind'
+				] as ShareKind) ?? 'app',
+		},
 	);
 
 	readonly shareUrl = computed(() => {
 		if (this.kind() === 'profile') {
 			return `${companyProfile.siteUrl}/visitor/${this._userService.user()._id}`;
 		}
-		return `${companyProfile.siteUrl}/sign`;
+		return `${companyProfile.siteUrl}/onboarding`;
 	});
 
 	readonly title = computed(() =>
@@ -44,15 +56,21 @@ export class SharePageComponent {
 
 	readonly description = computed(() =>
 		this.kind() === 'profile'
-			? this.translateService.translate('Let people scan this code to open my Meetka profile.')()
-			: this.translateService.translate('Scan this code to join Meetka in seconds — no app to install, just sign up and you\'re in.')(),
+			? this.translateService.translate(
+					'Let people scan this code to open my Meetka profile.',
+				)()
+			: this.translateService.translate(
+					"Scan this code to join Meetka in seconds — no app to install, just sign up and you're in.",
+				)(),
 	);
 
 	copyLink(): void {
 		navigator.clipboard?.writeText(this.shareUrl()).then(() => {
 			this._messageService.add({
 				severity: 'success',
-				detail: this.translateService.translate('Link copied to clipboard')(),
+				detail: this.translateService.translate(
+					'Link copied to clipboard',
+				)(),
 			});
 		});
 	}

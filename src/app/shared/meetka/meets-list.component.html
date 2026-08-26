@@ -17,18 +17,21 @@
 			[placeholder]="translateService.translate('Coffee Shops')()"
 			[ngModel]="selectedCoffeeShopId()"
 			(ngModelChange)="selectedCoffeeShopId.set($event)"
+			appendTo="body"
 			class="meets-list__coffee-shops"
 		/>
 
-		<button
-			pButton
-			type="button"
-			class="meets-list__past-toggle"
-			[severity]="showPast() ? 'primary' : 'secondary'"
-			(click)="showPast.set(!showPast())"
-		>
-			{{ translateService.translate('Show past meets')() }}
-		</button>
+		@if (!todayOnly()) {
+			<button
+				pButton
+				type="button"
+				class="meets-list__past-toggle"
+				[severity]="showPast() ? 'primary' : 'secondary'"
+				(click)="showPast.set(!showPast())"
+			>
+				{{ translateService.translate('Show past meets')() }}
+			</button>
+		}
 	</div>
 
 	<div class="meets-list__grid">

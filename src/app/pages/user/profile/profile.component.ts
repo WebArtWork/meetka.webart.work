@@ -134,7 +134,7 @@ export class ProfileComponent {
 	}
 
 	openMeet(id: string): void {
-		this._router.navigate(['/meet', id]);
+		this._router.navigate(['/meet'], { queryParams: { id } });
 	}
 
 	updateAge(age: number | null): void {

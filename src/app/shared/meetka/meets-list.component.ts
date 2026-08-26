@@ -31,6 +31,8 @@ export class MeetsListComponent {
 	scope = input<'all' | 'mine'>('all');
 	initialCoffeeShopId = input<string | null>(null);
 	title = input('');
+	/** Restrict the list to meets happening today (used by the home page). */
+	todayOnly = input(false);
 
 	readonly coffeeShops = this._coffeeShopsService.shops;
 
@@ -53,7 +55,8 @@ export class MeetsListComponent {
 		const filter: MeetsFilter = {
 			interestIds: this.selectedInterestIds(),
 			coffeeShopId: this.selectedCoffeeShopId() ?? undefined,
-			timeframe: this.showPast() ? 'all' : 'upcoming',
+			timeframe: this.todayOnly() || !this.showPast() ? 'upcoming' : 'all',
+			date: this.todayOnly() ? new Date().toISOString().slice(0, 10) : undefined,
 		};
 
 		return filterMeets(sourceMeets, this._coffeeShopsService.shops(), filter)
@@ -65,7 +68,7 @@ export class MeetsListComponent {
 	}
 
 	openMeet(id: string): void {
-		this._router.navigate(['/meet', id]);
+		this._router.navigate(['/meet'], { queryParams: { id } });
 	}
 
 	toggleGoing(meetId: string, going: boolean): void {

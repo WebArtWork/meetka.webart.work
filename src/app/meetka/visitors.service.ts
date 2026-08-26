@@ -10,4 +10,16 @@ export class VisitorsService {
 	get(id: string): Visitor | undefined {
 		return this._visitors().find((visitor) => visitor.id === id);
 	}
+
+	/** Accepts a new walk-in as a full visitor profile (onboarding flow). */
+	add(visitor: Omit<Visitor, 'id'>): Visitor {
+		const created: Visitor = {
+			...visitor,
+			id: `visitor-${crypto.randomUUID()}`,
+		};
+
+		this._visitors.update((visitors) => [...visitors, created]);
+
+		return created;
+	}
 }

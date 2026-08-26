@@ -8,51 +8,11 @@ import { baristaGuard } from './pages/barista/barista.guard';
 
 export const routes: Routes = [
 	{
-		path: '',
-		redirectTo: 'map',
-		pathMatch: 'full',
-	},
-	{
-		path: '',
-		canActivate: [guestGuard],
-		loadComponent: () =>
-			import('./layouts/guest/guest.component').then(
-				(m) => m.GuestComponent,
-			),
-		children: [
-			{
-				path: 'sign',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Вхід',
-						description: 'Увійди в Meetka, щоб створювати зустрічі та зберігати улюблені кав\'ярні.',
-						image: meetkaSeoImage,
-					},
-				},
-				loadChildren: () =>
-					import('./pages/guest/sign/sign.routes').then(
-						(m) => m.routes,
-					),
-			},
-		],
-	},
-	{
-		// Barista tools, gated to the `barista` role (admins too). Registered
-		// ahead of the public discovery block below so `barista/visitors`
-		// doesn't get swallowed by that block's `barista/:id` profile route.
-		path: 'barista',
-		canActivate: [baristaGuard],
-		loadComponent: () =>
-			import('./layouts/user/user.component').then(
-				(m) => m.UserComponent,
-			),
-		children: [...baristaRoutes],
-	},
-	{
 		// Public discovery — no auth guard, so Map/Coffee Shops/Meets stay
 		// reachable without signing in. Personal actions (create/edit a meet,
-		// My Meets) are still gated per-route below.
+		// My Meets) are still gated per-route below. Registered first so the
+		// root path (today's meets, via meetkaRoutes) matches immediately
+		// instead of falling through the guest/barista blocks below.
 		path: '',
 		loadComponent: () =>
 			import('./layouts/user/user.component').then(
@@ -83,28 +43,47 @@ export const routes: Routes = [
 	},
 	{
 		path: '',
+		canActivate: [guestGuard],
+		loadComponent: () =>
+			import('./layouts/guest/guest.component').then(
+				(m) => m.GuestComponent,
+			),
+		children: [
+			{
+				path: 'sign',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Вхід',
+						description: 'Увійди в Meetka, щоб створювати зустрічі та зберігати улюблені кав\'ярні.',
+						image: meetkaSeoImage,
+					},
+				},
+				loadChildren: () =>
+					import('./pages/guest/sign/sign.routes').then(
+						(m) => m.routes,
+					),
+			},
+		],
+	},
+	{
+		// Barista tools, gated to the `barista` role (admins too).
+		path: 'barista',
+		canActivate: [baristaGuard],
+		loadComponent: () =>
+			import('./layouts/user/user.component').then(
+				(m) => m.UserComponent,
+			),
+		children: [...baristaRoutes],
+	},
+	{
+		path: '',
 		canActivate: [authenticatedGuard],
 		loadComponent: () =>
 			import('./layouts/user/user.component').then(
 				(m) => m.UserComponent,
 			),
 		children: [
-			{
-				path: 'dashboard',
-				canActivate: [MetaGuard],
-				data: {
-					meta: {
-						title: 'Панель',
-						description: 'Особиста панель користувача Meetka.',
-						image: meetkaSeoImage,
-						index: false,
-					},
-				},
-				loadChildren: () =>
-					import('./pages/user/dashboard/dashboard.routes').then(
-						(m) => m.routes,
-					),
-			},
 			{
 				path: 'profile',
 				canActivate: [MetaGuard],

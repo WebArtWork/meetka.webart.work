@@ -33,7 +33,7 @@ export class MeetPageComponent {
 	readonly translateService = inject(TranslateService);
 
 	private readonly _id = toSignal(
-		inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('id') ?? '')),
+		inject(ActivatedRoute).queryParamMap.pipe(map((params) => params.get('id') ?? '')),
 		{ initialValue: '' },
 	);
 
@@ -99,7 +99,7 @@ export class MeetPageComponent {
 		if (!meet) return;
 
 		if (!user?._id) {
-			this._router.navigate(['/sign'], { queryParams: { returnUrl: `/meet/${meet.id}` } });
+			this._router.navigate(['/sign'], { queryParams: { returnUrl: `/meet?id=${meet.id}` } });
 			return;
 		}
 
@@ -142,7 +142,7 @@ export class MeetPageComponent {
 	shareMeet(): void {
 		const meet = this.meet();
 		if (!meet) return;
-		const url = `${window.location.origin}/meet/${meet.id}`;
+		const url = `${window.location.origin}/meet?id=${meet.id}`;
 		navigator.clipboard?.writeText(url).then(() => {
 			this._messageService.add({
 				severity: 'success',

@@ -81,7 +81,7 @@ export class CoffeeShopPageComponent {
 	}
 
 	openMeet(id: string): void {
-		this._router.navigate(['/meet', id]);
+		this._router.navigate(['/meet'], { queryParams: { id } });
 	}
 
 	openMenu(): void {
