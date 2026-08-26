@@ -7,6 +7,7 @@ import { MessageService } from '@wawjs/ngx-prime/api';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { QrCodeComponent } from '../../../shared/meetka/qr-code.component';
+import { companyProfile } from '../../../company/company.data';
 
 export type ShareKind = 'app' | 'profile';
 
@@ -28,13 +29,11 @@ export class SharePageComponent {
 		{ initialValue: (this._activatedRoute.snapshot.data['shareKind'] as ShareKind) ?? 'app' },
 	);
 
-	private readonly _origin = typeof window !== 'undefined' ? window.location.origin : '';
-
 	readonly shareUrl = computed(() => {
 		if (this.kind() === 'profile') {
-			return `${this._origin}/visitor/${this._userService.user()._id}`;
+			return `${companyProfile.siteUrl}/visitor/${this._userService.user()._id}`;
 		}
-		return `${this._origin}/sign`;
+		return `${companyProfile.siteUrl}/sign`;
 	});
 
 	readonly title = computed(() =>
