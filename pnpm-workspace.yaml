@@ -5,4 +5,9 @@ allowBuilds:
   lmdb: false
   msgpackr-extract: false
 minimumReleaseAgeExclude:
-  - '@wawjs/ngx-prime@22.0.2'
+  - '@wawjs/ngx-prime@22.0.2 || 22.0.3'
+  - '@wawjs/css-prime-motion@1.1.0'
+  - '@wawjs/css-prime-styled@1.1.0'
+  - '@wawjs/css-prime-styles@1.1.0'
+  - '@wawjs/css-prime-themes@1.1.0'
+  - '@wawjs/css-prime-utils@1.1.0'
