@@ -70,7 +70,7 @@
 				<h2>{{ translateService.translate('Baristas')() }}</h2>
 				<div class="coffee-shop-page__baristas">
 					@for (barista of baristas(); track barista.id) {
-						<a class="coffee-shop-page__barista" [routerLink]="['/barista', barista.id]">
+						<a class="coffee-shop-page__barista" routerLink="/barista" [queryParams]="{ id: barista.id }">
 							<img [src]="barista.photo" [alt]="barista.name" />
 							<span>{{ barista.name }}</span>
 						</a>

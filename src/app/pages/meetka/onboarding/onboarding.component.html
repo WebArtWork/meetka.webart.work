@@ -1,8 +1,8 @@
 <div class="onboarding-page">
 	<header class="onboarding-page__header">
-		<h1 translate>Новий учасник</h1>
+		<h1 translate>Welcome to Meetka</h1>
 		<p class="onboarding-page__hint" translate>
-			Швидко прийми нового учасника: додай фото, ім'я та інтереси.
+			Give us some info about yourself — a photo, your name, and your interests.
 		</p>
 	</header>
 
@@ -13,18 +13,17 @@
 		<button
 			type="button"
 			class="onboarding-page__photo"
-			[class.onboarding-page__photo--empty]="!photo()"
 			(click)="openPhotoPicker()"
-			[attr.aria-label]="translateService.translate('Обрати фото')()"
+			[attr.aria-label]="translateService.translate('Choose a photo')()"
 		>
-			@if (photo(); as photoSrc) {
-			<img
-				[src]="photoSrc"
-				[alt]="translateService.translate('Фото учасника')()"
+			<p-avatar
+				[image]="photo() ?? undefined"
+				[icon]="photo() ? undefined : 'pi pi-camera'"
+				shape="circle"
+				size="xlarge"
+				styleClass="onboarding-page__avatar"
 			/>
-			} @else {
-			<i class="pi pi-camera"></i>
-			}
+			<span class="onboarding-page__photo-edit"><i class="pi pi-pencil"></i></span>
 		</button>
 		<input
 			#fileInput
@@ -36,28 +35,40 @@
 		/>
 
 		<div class="onboarding-page__field">
+			<label for="onboarding-name" translate>Your name</label>
 			<input
+				#nameInput
+				id="onboarding-name"
 				pInputText
 				class="w-full"
-				[placeholder]="translateService.translate('Ім\'я...')()"
-				[formField]="nameField"
-				autofocus
+				[placeholder]="translateService.translate('What should we call you?')()"
+				[ngModel]="name()"
+				(ngModelChange)="name.set($event)"
+				name="name"
+				(blur)="nameTouched.set(true)"
 			/>
-			<app-field-error [field]="nameField" />
+			@if (nameTouched() && nameInvalid()) {
+				<small class="onboarding-page__field-error" translate>Please enter your name...</small>
+			}
 		</div>
 
 		<div class="onboarding-page__field">
+			<label for="onboarding-bio" translate>About you</label>
 			<textarea
+				id="onboarding-bio"
 				pTextarea
 				class="w-full"
 				rows="3"
-				[placeholder]="translateService.translate('Пару слів про учасника...')()"
-				[formField]="bioField"
+				[placeholder]="translateService.translate('Tell us a bit about yourself...')()"
+				[ngModel]="bio()"
+				(ngModelChange)="bio.set($event)"
+				name="bio"
 			></textarea>
 		</div>
 
 		<div class="onboarding-page__field">
-			<app-interests-filter [(selectedInterestIds)]="interestIds" />
+			<label translate>Interests</label>
+			<app-interests-filter [(selectedInterestIds)]="interestIds" styleClass="w-full" />
 		</div>
 
 		<button
@@ -66,7 +77,7 @@
 			[disabled]="isSubmitting()"
 			class="w-full"
 		>
-			{{ translateService.translate('Прийняти учасника')() }}
+			{{ translateService.translate('Join Meetka')() }}
 		</button>
 	</form>
 </div>

@@ -131,12 +131,12 @@ export class MeetPageComponent {
 
 	openCoffeeShop(): void {
 		const shop = this.coffeeShop();
-		if (shop) this._router.navigate(['/coffee-shop', shop.id]);
+		if (shop) this._router.navigate(['/coffee-shop', shop.slug]);
 	}
 
 	openMenu(): void {
 		const shop = this.coffeeShop();
-		if (shop) this._router.navigate(['/menu', shop.id]);
+		if (shop) this._router.navigate(['/menu', shop.slug]);
 	}
 
 	shareMeet(): void {

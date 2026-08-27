@@ -23,12 +23,12 @@ export class MenuPageComponent {
 	private readonly _metaService = inject(MetaService);
 	readonly translateService = inject(TranslateService);
 
-	private readonly _coffeeShopId = toSignal(
-		inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('coffeeShopId') ?? '')),
+	private readonly _slug = toSignal(
+		inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('coffeeShopSlug') ?? '')),
 		{ initialValue: '' },
 	);
 
-	readonly shop = computed(() => this._coffeeShopsService.get(this._coffeeShopId()));
+	readonly shop = computed(() => this._coffeeShopsService.getBySlug(this._slug()));
 
 	constructor() {
 		effect(() => {
@@ -43,6 +43,6 @@ export class MenuPageComponent {
 	}
 
 	back(): void {
-		this._router.navigate(['/coffee-shop', this._coffeeShopId()]);
+		this._router.navigate(['/coffee-shop', this._slug()]);
 	}
 }

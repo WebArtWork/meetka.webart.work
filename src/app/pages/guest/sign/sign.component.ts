@@ -21,6 +21,7 @@ import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { InputTextModule } from '@wawjs/ngx-prime/inputtext';
 import { PasswordModule } from '@wawjs/ngx-prime/password';
 import { TranslateDirective, TranslateService } from '@wawjs/ngx-translate';
+import { SessionBridgeService } from '../../../auth/session-bridge.service';
 import { FieldErrorComponent } from '../../../shared/field-error/field-error.component';
 import { ThemeState } from '../../../theme/theme-state';
 import { RespStatus, SignModel } from './sign.interface';
@@ -50,6 +51,7 @@ export class SignComponent {
 	readonly translateService = inject(TranslateService);
 	private _messageService = inject(MessageService);
 	private _httpService = inject(HttpService);
+	private _sessionBridge = inject(SessionBridgeService);
 	private _router = inject(Router);
 	private _route = inject(ActivatedRoute);
 
@@ -173,7 +175,10 @@ export class SignComponent {
 		}
 
 		const token = (user as unknown as { token: string }).token || '';
-		if (token) this._httpService.set('token', token);
+		if (token) {
+			this._httpService.set('token', token);
+			this._sessionBridge.push(token);
+		}
 
 		localStorage.setItem('waw_user', JSON.stringify(user));
 		this.userService.setUser(user);

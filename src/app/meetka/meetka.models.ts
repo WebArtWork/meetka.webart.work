@@ -31,6 +31,8 @@ export interface MenuCategory {
 
 export interface CoffeeShop {
 	id: string;
+	/** URL-friendly identifier used in `/coffee-shop/:coffeeShopSlug` and `/menu/:coffeeShopSlug`. */
+	slug: string;
 	name: string;
 	photos: string[];
 	address: string;

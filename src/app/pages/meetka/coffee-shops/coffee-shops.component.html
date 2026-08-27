@@ -18,7 +18,7 @@
 				[coffeeShop]="shop"
 				[distanceKm]="distanceToShop(shop.location)"
 				[upcomingMeetCount]="upcomingMeetCountByShop().get(shop.id) ?? 0"
-				(open)="openCoffeeShop(shop.id)"
+				(open)="openCoffeeShop(shop.slug)"
 			/>
 		} @empty {
 			<p class="coffee-shops-page__empty">{{ translateService.translate('No coffee shops match your filters yet.')() }}</p>

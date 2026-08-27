@@ -32,12 +32,13 @@ export class CoffeeShopPageComponent {
 	readonly userService = inject(UserService);
 	readonly translateService = inject(TranslateService);
 
-	private readonly _id = toSignal(
-		inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('id') ?? '')),
+	private readonly _slug = toSignal(
+		inject(ActivatedRoute).paramMap.pipe(map((params) => params.get('coffeeShopSlug') ?? '')),
 		{ initialValue: '' },
 	);
 
-	readonly shop = computed(() => this._coffeeShopsService.get(this._id()));
+	readonly shop = computed(() => this._coffeeShopsService.getBySlug(this._slug()));
+	private readonly _id = computed(() => this.shop()?.id ?? '');
 	readonly baristas = computed(() => this._baristasService.byCoffeeShop(this._id()));
 
 	constructor() {
@@ -85,7 +86,7 @@ export class CoffeeShopPageComponent {
 	}
 
 	openMenu(): void {
-		this._router.navigate(['/menu', this._id()]);
+		this._router.navigate(['/menu', this._slug()]);
 	}
 
 	openAllMeets(): void {
@@ -101,7 +102,7 @@ export class CoffeeShopPageComponent {
 	}
 
 	shareCoffeeShop(): void {
-		const url = `${window.location.origin}/coffee-shop/${this._id()}`;
+		const url = `${window.location.origin}/coffee-shop/${this._slug()}`;
 		navigator.clipboard?.writeText(url).then(() => {
 			this.copiedShareLink.set(true);
 			this._messageService.add({

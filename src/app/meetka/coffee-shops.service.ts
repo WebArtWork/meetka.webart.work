@@ -11,6 +11,10 @@ export class CoffeeShopsService {
 		return this._shops().find((shop) => shop.id === id);
 	}
 
+	getBySlug(slug: string): CoffeeShop | undefined {
+		return this._shops().find((shop) => shop.slug === slug);
+	}
+
 	byInterests(interestIds: string[]): CoffeeShop[] {
 		if (!interestIds.length) return this._shops();
 		return this._shops().filter((shop) =>

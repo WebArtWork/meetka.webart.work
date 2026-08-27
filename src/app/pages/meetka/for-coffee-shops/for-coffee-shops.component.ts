@@ -1,18 +1,20 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { AccordionModule } from '@wawjs/ngx-prime/accordion';
 import { TranslateService } from '@wawjs/ngx-translate';
+import { LeadFormComponent } from '../../../shared/meetka/lead-form.component';
 
 @Component({
 	selector: 'app-for-coffee-shops',
-	imports: [RouterLink, ButtonModule, AccordionModule],
+	imports: [ButtonModule, AccordionModule, LeadFormComponent],
 	templateUrl: './for-coffee-shops.component.html',
 	styleUrl: './for-coffee-shops.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ForCoffeeShopsPageComponent {
 	readonly translateService = inject(TranslateService);
+
+	readonly showForm = signal(false);
 
 	readonly faq = [
 		{

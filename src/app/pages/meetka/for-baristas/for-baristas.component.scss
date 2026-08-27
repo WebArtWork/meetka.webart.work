@@ -20,6 +20,10 @@
 	p {
 		color: var(--c-text-muted);
 	}
+
+	button {
+		align-self: center;
+	}
 }
 
 .landing-page__section h2 {
@@ -47,10 +51,4 @@
 		border-radius: 50%;
 		object-fit: cover;
 	}
-}
-
-.landing-page__cta {
-	display: flex;
-	justify-content: center;
-	padding-bottom: 2rem;
 }

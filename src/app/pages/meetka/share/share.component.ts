@@ -43,7 +43,7 @@ export class SharePageComponent {
 
 	readonly shareUrl = computed(() => {
 		if (this.kind() === 'profile') {
-			return `${companyProfile.siteUrl}/visitor/${this._userService.user()._id}`;
+			return `${companyProfile.siteUrl}/visitor?id=${this._userService.user()._id}`;
 		}
 		return `${companyProfile.siteUrl}/onboarding`;
 	});

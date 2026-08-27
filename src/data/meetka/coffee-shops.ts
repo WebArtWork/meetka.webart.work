@@ -8,6 +8,7 @@ import { CoffeeShop } from '../../app/meetka/meetka.models';
 export const COFFEE_SHOPS: CoffeeShop[] = [
 	{
 		id: 'shop-lviv-croissant',
+		slug: 'lviv-croissants',
 		name: 'Lviv Croissants',
 		photos: ['https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800'],
 		address: 'Khreshchatyk St 15, Kyiv',
@@ -39,6 +40,7 @@ export const COFFEE_SHOPS: CoffeeShop[] = [
 	},
 	{
 		id: 'shop-podil-roasters',
+		slug: 'podil-roasters',
 		name: 'Podil Roasters',
 		photos: ['https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=800'],
 		address: 'Kontraktova Sq 4, Kyiv',
@@ -61,6 +63,7 @@ export const COFFEE_SHOPS: CoffeeShop[] = [
 	},
 	{
 		id: 'shop-print-station',
+		slug: 'print-station-coffee',
 		name: 'Print Station Coffee',
 		photos: ['https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800'],
 		address: 'Antonovycha St 20, Kyiv',
@@ -88,6 +91,7 @@ export const COFFEE_SHOPS: CoffeeShop[] = [
 	},
 	{
 		id: 'shop-run-club-cafe',
+		slug: 'run-club-cafe',
 		name: 'Run Club Café',
 		photos: ['https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800'],
 		address: 'Naberezhno-Khreshchatytska St 10, Kyiv',
@@ -112,6 +116,7 @@ export const COFFEE_SHOPS: CoffeeShop[] = [
 	},
 	{
 		id: 'shop-board-and-bean',
+		slug: 'board-and-bean',
 		name: 'Board & Bean',
 		photos: ['https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=800'],
 		address: 'Velyka Vasylkivska St 55, Kyiv',

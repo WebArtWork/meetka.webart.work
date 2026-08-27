@@ -119,6 +119,24 @@
 
 	<app-nav-icon
 		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('For Coffee Shops')() : ''"
+		[ariaLabel]="translateService.translate('For Coffee Shops')()"
+		(click)="closeIfOverlay()"
+		routerLink="/for-coffee-shops"
+		icon="shop"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('For Baristas')() : ''"
+		[ariaLabel]="translateService.translate('For Baristas')()"
+		(click)="closeIfOverlay()"
+		routerLink="/for-baristas"
+		icon="user-plus"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
 		[name]="showNames() ? translateService.translate('Share Meetka')() : ''"
 		[ariaLabel]="translateService.translate('Share Meetka')()"
 		(click)="closeIfOverlay()"

@@ -1,47 +1,33 @@
 import {
+	afterNextRender,
 	ChangeDetectionStrategy,
 	Component,
+	computed,
 	ElementRef,
 	inject,
 	signal,
 	viewChild,
 } from '@angular/core';
-import {
-	Field,
-	FormField,
-	form,
-	required,
-	schema,
-	submit,
-} from '@angular/forms/signals';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from '@wawjs/ngx-prime/api';
+import { AvatarModule } from '@wawjs/ngx-prime/avatar';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { InputTextModule } from '@wawjs/ngx-prime/inputtext';
 import { TextareaModule } from '@wawjs/ngx-prime/textarea';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { InterestsFilterComponent } from '../../../components/interests-filter/interests-filter.component';
-import { FieldErrorComponent } from '../../../shared/field-error/field-error.component';
 import { VisitorsService } from '../../../meetka/visitors.service';
-
-interface OnboardingModel {
-	name: string;
-	bio: string;
-}
-
-const onboardingSchema = schema<OnboardingModel>((path) => {
-	required(path.name, { message: "Введіть ім'я..." });
-});
 
 @Component({
 	selector: 'app-onboarding',
 	imports: [
-		FormField,
+		FormsModule,
+		AvatarModule,
 		ButtonModule,
 		InputTextModule,
 		TextareaModule,
 		InterestsFilterComponent,
-		FieldErrorComponent,
 	],
 	templateUrl: './onboarding.component.html',
 	styleUrl: './onboarding.component.scss',
@@ -55,20 +41,20 @@ export class OnboardingPageComponent {
 
 	private readonly _fileInput =
 		viewChild<ElementRef<HTMLInputElement>>('fileInput');
+	private readonly _nameInput =
+		viewChild<ElementRef<HTMLInputElement>>('nameInput');
 
-	readonly model = signal<OnboardingModel>({ name: '', bio: '' });
-	readonly form = form(this.model, onboardingSchema);
-
+	readonly name = signal('');
+	readonly bio = signal('');
 	readonly photo = signal<string | null>(null);
 	readonly interestIds = signal<string[]>([]);
 	readonly isSubmitting = signal(false);
+	readonly nameTouched = signal(false);
 
-	get nameField(): Field<string> {
-		return this.form.name;
-	}
+	readonly nameInvalid = computed(() => !this.name().trim());
 
-	get bioField(): Field<string> {
-		return this.form.bio;
+	constructor() {
+		afterNextRender(() => this._nameInput()?.nativeElement.focus());
 	}
 
 	openPhotoPicker(): void {
@@ -86,29 +72,24 @@ export class OnboardingPageComponent {
 	}
 
 	wFormSubmit(): void {
-		submit(this.form, (formTree) => {
-			const value = formTree().value() as OnboardingModel;
+		this.nameTouched.set(true);
+		if (this.nameInvalid() || this.isSubmitting()) return;
 
-			this.isSubmitting.set(true);
+		this.isSubmitting.set(true);
 
-			const visitor = this._visitorsService.add({
-				name: value.name,
-				bio: value.bio,
-				photo: this.photo() ?? '',
-				interestIds: this.interestIds(),
-				socialLinks: [],
-			});
-
-			this._messageService.add({
-				severity: 'success',
-				detail: this.translateService.translate(
-					'Новий учасник доданий',
-				)(),
-			});
-
-			this._router.navigate(['/visitor', visitor.id]);
-
-			return Promise.resolve({} as any);
+		const visitor = this._visitorsService.add({
+			name: this.name().trim(),
+			bio: this.bio().trim(),
+			photo: this.photo() ?? '',
+			interestIds: this.interestIds(),
+			socialLinks: [],
 		});
+
+		this._messageService.add({
+			severity: 'success',
+			detail: this.translateService.translate('Welcome to Meetka!')(),
+		});
+
+		this._router.navigate(['/visitor'], { queryParams: { id: visitor.id } });
 	}
 }

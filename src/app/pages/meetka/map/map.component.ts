@@ -49,7 +49,7 @@ export class MapPageComponent {
 
 	readonly markers = computed<LeafletMapMarker[]>(() =>
 		this.filteredShops().map((shop) => ({
-			id: shop.id,
+			id: shop.slug,
 			position: shop.location,
 			title: shop.name,
 			label: String(this.upcomingMeetsByShop().get(shop.id) ?? ''),

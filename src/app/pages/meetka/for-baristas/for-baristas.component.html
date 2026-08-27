@@ -1,42 +1,49 @@
-<div class="landing-page">
-	<header class="landing-page__hero">
-		<h1>{{ translateService.translate('You\'re more than the person behind the counter')() }}</h1>
-		<p>{{ translateService.translate('Meetka gives baristas a light, optional role as a social connector — helping regulars recognize each other, without becoming a formal matchmaker.')() }}</p>
-	</header>
+@if (showForm()) {
+	<div class="landing-page">
+		<header class="landing-page__hero">
+			<h1>{{ translateService.translate('Join as a Barista')() }}</h1>
+		</header>
 
-	<section class="landing-page__section">
-		<h2>{{ translateService.translate('What changes for you')() }}</h2>
-		<ul class="landing-page__list">
-			<li>{{ translateService.translate('You help people understand which meet is happening at your shop right now.')() }}</li>
-			<li>{{ translateService.translate('You can help two participants recognize each other for a private meet — the "Magic Coffee" concept.')() }}</li>
-			<li>{{ translateService.translate('Participation stays lightweight — there\'s no requirement to organize or manage anything.')() }}</li>
-			<li>{{ translateService.translate('Your normal workflow behind the counter stays exactly the same.')() }}</li>
-		</ul>
-	</section>
+		<app-lead-form kind="barista" [submitLabel]="translateService.translate('Join as a Barista')()" />
+	</div>
+} @else {
+	<div class="landing-page">
+		<header class="landing-page__hero">
+			<h1>{{ translateService.translate('You\'re more than the person behind the counter')() }}</h1>
+			<p>{{ translateService.translate('Meetka gives baristas a light, optional role as a social connector — helping regulars recognize each other, without becoming a formal matchmaker.')() }}</p>
+			<button pButton type="button" (click)="showForm.set(true)">{{ translateService.translate('Join as a Barista')() }}</button>
+		</header>
 
-	@if (exampleBarista) {
 		<section class="landing-page__section">
-			<h2>{{ translateService.translate('Example barista profile')() }}</h2>
-			<a class="landing-page__barista-preview" [routerLink]="['/barista', exampleBarista.id]">
-				<img [src]="exampleBarista.photo" [alt]="exampleBarista.name" />
-				<span>{{ exampleBarista.name }}</span>
-			</a>
+			<h2>{{ translateService.translate('What changes for you')() }}</h2>
+			<ul class="landing-page__list">
+				<li>{{ translateService.translate('You help people understand which meet is happening at your shop right now.')() }}</li>
+				<li>{{ translateService.translate('You can help two participants recognize each other for a private meet — the "Magic Coffee" concept.')() }}</li>
+				<li>{{ translateService.translate('Participation stays lightweight — there\'s no requirement to organize or manage anything.')() }}</li>
+				<li>{{ translateService.translate('Your normal workflow behind the counter stays exactly the same.')() }}</li>
+			</ul>
 		</section>
-	}
 
-	<section class="landing-page__section">
-		<h2>{{ translateService.translate('FAQ')() }}</h2>
-		<p-accordion [multiple]="true">
-			@for (item of faq; track item.question) {
-				<p-accordionpanel [value]="item.question">
-					<p-accordionheader>{{ translateService.translate(item.question)() }}</p-accordionheader>
-					<p-accordioncontent>{{ translateService.translate(item.answer)() }}</p-accordioncontent>
-				</p-accordionpanel>
-			}
-		</p-accordion>
-	</section>
+		@if (exampleBarista) {
+			<section class="landing-page__section">
+				<h2>{{ translateService.translate('Example barista profile')() }}</h2>
+				<a class="landing-page__barista-preview" routerLink="/barista" [queryParams]="{ id: exampleBarista.id }">
+					<img [src]="exampleBarista.photo" [alt]="exampleBarista.name" />
+					<span>{{ exampleBarista.name }}</span>
+				</a>
+			</section>
+		}
 
-	<footer class="landing-page__cta">
-		<a pButton routerLink="/sign">{{ translateService.translate('Join as a Barista')() }}</a>
-	</footer>
-</div>
+		<section class="landing-page__section">
+			<h2>{{ translateService.translate('FAQ')() }}</h2>
+			<p-accordion [multiple]="true">
+				@for (item of faq; track item.question) {
+					<p-accordionpanel [value]="item.question">
+						<p-accordionheader>{{ translateService.translate(item.question)() }}</p-accordionheader>
+						<p-accordioncontent>{{ translateService.translate(item.answer)() }}</p-accordioncontent>
+					</p-accordionpanel>
+				}
+			</p-accordion>
+		</section>
+	</div>
+}

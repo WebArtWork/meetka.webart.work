@@ -52,7 +52,7 @@ export const meetkaRoutes: Routes = [
 	},
 	{
 		// Title/description/image are overridden per shop by CoffeeShopPageComponent via MetaService.applyMeta().
-		path: 'coffee-shop/:id',
+		path: 'coffee-shop/:coffeeShopSlug',
 		canActivate: [MetaGuard],
 		data: {
 			meta: {
@@ -115,7 +115,7 @@ export const meetkaRoutes: Routes = [
 	},
 	{
 		// Title/description/image are overridden per coffee shop by MenuPageComponent via MetaService.applyMeta().
-		path: 'menu/:coffeeShopId',
+		path: 'menu/:coffeeShopSlug',
 		canActivate: [MetaGuard],
 		data: {
 			meta: {
@@ -177,8 +177,10 @@ export const meetkaRoutes: Routes = [
 			),
 	},
 	{
+		// Barista identity comes via the `id` query param (?id=...), not a path
+		// segment — profiles will be loaded from the API by id.
 		// Title/description/image are overridden per barista by ProfilePageComponent via MetaService.applyMeta().
-		path: 'barista/:id',
+		path: 'barista',
 		canActivate: [MetaGuard],
 		data: {
 			profileKind: 'barista',
@@ -194,8 +196,10 @@ export const meetkaRoutes: Routes = [
 			),
 	},
 	{
+		// Visitor identity comes via the `id` query param (?id=...), not a path
+		// segment — profiles will be loaded from the API by id.
 		// Title/description/image are overridden per visitor by ProfilePageComponent via MetaService.applyMeta().
-		path: 'visitor/:id',
+		path: 'visitor',
 		canActivate: [MetaGuard],
 		data: {
 			profileKind: 'visitor',

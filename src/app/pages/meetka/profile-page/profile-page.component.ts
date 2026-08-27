@@ -38,7 +38,7 @@ export class ProfilePageComponent {
 	);
 
 	private readonly _id = toSignal(
-		this._activatedRoute.paramMap.pipe(map((params) => params.get('id') ?? '')),
+		this._activatedRoute.queryParamMap.pipe(map((params) => params.get('id') ?? '')),
 		{ initialValue: '' },
 	);
 
@@ -71,13 +71,13 @@ export class ProfilePageComponent {
 
 	openCoffeeShop(): void {
 		const shop = this.coffeeShop();
-		if (shop) this._router.navigate(['/coffee-shop', shop.id]);
+		if (shop) this._router.navigate(['/coffee-shop', shop.slug]);
 	}
 
 	shareProfile(): void {
 		const person = this.person();
 		if (!person) return;
-		const url = `${window.location.origin}/${this.kind()}/${person.id}`;
+		const url = `${window.location.origin}/${this.kind()}?id=${person.id}`;
 		navigator.clipboard?.writeText(url).then(() => {
 			this._messageService.add({
 				severity: 'success',

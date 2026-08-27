@@ -3,6 +3,9 @@ export const environment = {
 	production: true,
 	appId: 'appId',
 	url: 'https://it.webart.work',
+	contact: {
+		slug: 'meetka.webart.work',
+	},
 	sign: {
 		logo: '',
 		email: '',

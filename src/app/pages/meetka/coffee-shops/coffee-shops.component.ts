@@ -63,7 +63,7 @@ export class CoffeeShopsPageComponent {
 		return distanceKm(this.geoService.userLocation(), location);
 	}
 
-	openCoffeeShop(id: string): void {
-		this._router.navigate(['/coffee-shop', id]);
+	openCoffeeShop(slug: string): void {
+		this._router.navigate(['/coffee-shop', slug]);
 	}
 }
