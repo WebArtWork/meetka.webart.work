@@ -107,7 +107,7 @@
 		<h2 class="settings__label" translate>Switch language</h2>
 		@if (languageName()) {
 			<button (click)="nextLanguage()" class="settings__language" [attr.aria-label]="translateService.translate('Switch language')()" type="button">
-				<span class="settings__flag" aria-hidden="true">{{ languageFlagEmoji() }}</span>
+				<img class="settings__flag" [src]="languageFlag()" alt="" aria-hidden="true" />
 				<span [translate]="languageName()"></span>
 			</button>
 		}

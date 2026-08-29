@@ -18,6 +18,7 @@ import {
 	TranslateService,
 } from '@wawjs/ngx-translate';
 import { FieldErrorComponent } from '../../../shared/field-error/field-error.component';
+import { languageFlagUrl } from '../../../shared/language-flags/language-flags';
 import { ThemeState } from '../../../theme/theme-state';
 import { GeoService } from '../../../meetka/geo.service';
 import { SecurityModel } from './settings.interface';
@@ -50,27 +51,7 @@ export class SettingsComponent {
 
 		return language?.name ?? '';
 	});
-	private static readonly LANGUAGE_FLAG_EMOJI: Record<string, string> = {
-		cs: '🇨🇿',
-		de: '🇩🇪',
-		el: '🇬🇷',
-		en: '🇬🇧',
-		es: '🇪🇸',
-		fr: '🇫🇷',
-		hu: '🇭🇺',
-		it: '🇮🇹',
-		nl: '🇳🇱',
-		pl: '🇵🇱',
-		pt: '🇵🇹',
-		ro: '🇷🇴',
-		sv: '🇸🇪',
-		ua: '🇺🇦',
-		uk: '🇺🇦',
-	};
-
-	readonly languageFlagEmoji = computed(
-		() => SettingsComponent.LANGUAGE_FLAG_EMOJI[this.languageService.language()] ?? '🌐',
-	);
+	readonly languageFlag = computed(() => languageFlagUrl(this.languageService.language()));
 
 	readonly securityModel = signal<SecurityModel>({
 		currentPassword: '',
