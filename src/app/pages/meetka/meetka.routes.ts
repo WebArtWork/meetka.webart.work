@@ -68,6 +68,20 @@ export const meetkaRoutes: Routes = [
 			),
 	},
 	{
+		path: 'feed',
+		canActivate: [MetaGuard],
+		data: {
+			meta: {
+				title: 'Стрічка',
+				description:
+					"Перегортай кав'ярні поруч — відкладай цікаве в обране, пропускай зайве.",
+				image: meetkaSeoImage,
+			},
+		},
+		loadComponent: () =>
+			import('./feed/feed.component').then((m) => m.FeedPageComponent),
+	},
+	{
 		path: 'meets',
 		canActivate: [MetaGuard],
 		data: {

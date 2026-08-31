@@ -1,0 +1,24 @@
+.feed__list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	max-width: 480px;
+	margin: 0 auto;
+}
+
+.feed__item {
+	position: relative;
+}
+
+.feed__actions {
+	display: flex;
+	justify-content: center;
+	gap: 1.5rem;
+	margin-top: 0.5rem;
+}
+
+.feed__empty {
+	color: var(--c-text-muted);
+	text-align: center;
+	padding: 2rem 1rem;
+}

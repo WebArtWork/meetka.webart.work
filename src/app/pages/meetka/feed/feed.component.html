@@ -1,0 +1,41 @@
+<div class="feed">
+	@let items = feed();
+
+	@if (items.length) {
+		<div class="feed__list">
+			@for (shop of items; track shop.id) {
+				<div class="feed__item">
+					<app-coffee-shop-card
+						[coffeeShop]="shop"
+						[upcomingMeetCount]="upcomingMeetCountByShop().get(shop.id) ?? 0"
+						[distanceKm]="distanceToShop(shop.location)"
+						(open)="open(shop.slug)"
+					/>
+
+					<div class="feed__actions">
+						<p-button
+							icon="pi pi-heart"
+							severity="success"
+							[rounded]="true"
+							[outlined]="true"
+							styleClass="feed__action-btn"
+							(onClick)="act(shop.id, 'favourite')"
+						/>
+						<p-button
+							icon="pi pi-times"
+							severity="danger"
+							[rounded]="true"
+							[outlined]="true"
+							styleClass="feed__action-btn"
+							(onClick)="act(shop.id, 'ignore')"
+						/>
+					</div>
+				</div>
+			}
+		</div>
+	} @else {
+		<div class="feed__empty">
+			<p>{{ translateService.translate('No more coffee shops to discover right now.')() }}</p>
+		</div>
+	}
+</div>
