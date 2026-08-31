@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { GeoPoint } from './meetka.models';
+import { GeoPoint } from './geo.interface';
 
 const KYIV_CENTER: GeoPoint = { lat: 50.4501, lng: 30.5234 };
 const STORAGE_KEY = 'meetka-discovery-radius-km';

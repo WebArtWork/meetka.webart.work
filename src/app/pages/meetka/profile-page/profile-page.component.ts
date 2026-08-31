@@ -7,17 +7,17 @@ import { TagModule } from '@wawjs/ngx-prime/tag';
 import { MessageService } from '@wawjs/ngx-prime/api';
 import { MetaService } from '@wawjs/ngx-core';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { BaristasService } from '../../../meetka/baristas.service';
-import { VisitorsService } from '../../../meetka/visitors.service';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { InterestChipsComponent } from '../../../shared/meetka/interest-chips.component';
+import { BaristasService } from '../../../features/barista/barista.service';
+import { VisitorsService } from '../../../features/visitor/visitor.service';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { InterestShortComponent } from '../../../features/interest/interest-short/interest-short.component';
 import { meetkaSeoImage } from '../meetka.seo';
 
 export type ProfileKind = 'barista' | 'visitor';
 
 @Component({
 	selector: 'app-profile-page',
-	imports: [ButtonModule, TagModule, InterestChipsComponent],
+	imports: [ButtonModule, TagModule, InterestShortComponent],
 	templateUrl: './profile-page.component.html',
 	styleUrl: './profile-page.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { BaristaProfile } from '../../app/meetka/meetka.models';
+import { BaristaProfile } from './barista.interface';
 
 /**
  * Placeholder barista profiles. Replace with real staff data before launch.

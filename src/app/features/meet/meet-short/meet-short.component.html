@@ -19,7 +19,7 @@
 	<h3 class="meet-card__title">{{ meet().title }}</h3>
 	<p class="meet-card__description">{{ meet().description }}</p>
 
-	<app-interest-chips [interestIds]="meet().interestIds" />
+	<app-interest-short [interestIds]="meet().interestIds" />
 
 	<div class="meet-card__meta">
 		<span class="meet-card__shop">{{ coffeeShopName() }}</span>

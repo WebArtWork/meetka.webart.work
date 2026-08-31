@@ -4,9 +4,9 @@ import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { LeafletMapComponent, LeafletMapMarker } from '../../../shared/meetka/leaflet-map.component';
 import { InterestsFilterComponent } from '../../../components/interests-filter/interests-filter.component';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { GeoService } from '../../../meetka/geo.service';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { GeoService } from '../../../shared/geo/geo.service';
 
 @Component({
 	selector: 'app-map',

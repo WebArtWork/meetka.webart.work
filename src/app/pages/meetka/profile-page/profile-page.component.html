@@ -18,7 +18,7 @@
 
 		<p class="profile-page__bio">{{ person.bio }}</p>
 
-		<app-interest-chips [interestIds]="person.interestIds" />
+		<app-interest-short [interestIds]="person.interestIds" />
 
 		@if (barista(); as barista) {
 			@if (barista.tipLinks.length) {

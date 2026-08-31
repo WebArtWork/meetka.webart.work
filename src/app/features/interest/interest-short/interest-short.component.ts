@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import { ChipModule } from '@wawjs/ngx-prime/chip';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { interestsByIds } from '../../meetka/meetka.interests';
+import { interestsByIds } from '../interest.data';
 
 @Component({
-	selector: 'app-interest-chips',
+	selector: 'app-interest-short',
 	imports: [ChipModule],
 	template: `
 		@for (interest of interests(); track interest.id) {
@@ -20,7 +20,7 @@ import { interestsByIds } from '../../meetka/meetka.interests';
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InterestChipsComponent {
+export class InterestShortComponent {
 	readonly translateService = inject(TranslateService);
 
 	interestIds = input<string[]>([]);

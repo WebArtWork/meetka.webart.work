@@ -4,17 +4,17 @@ import { CardModule } from '@wawjs/ngx-prime/card';
 import { TagModule } from '@wawjs/ngx-prime/tag';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { Meet } from '../../meetka/meetka.models';
-import { InterestChipsComponent } from './interest-chips.component';
+import { Meet } from '../meet.interface';
+import { InterestShortComponent } from '../../interest/interest-short/interest-short.component';
 
 @Component({
-	selector: 'app-meet-card',
-	imports: [CardModule, TagModule, ButtonModule, DecimalPipe, InterestChipsComponent],
-	templateUrl: './meet-card.component.html',
-	styleUrl: './meet-card.component.scss',
+	selector: 'app-meet-short',
+	imports: [CardModule, TagModule, ButtonModule, DecimalPipe, InterestShortComponent],
+	templateUrl: './meet-short.component.html',
+	styleUrl: './meet-short.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MeetCardComponent {
+export class MeetShortComponent {
 	readonly translateService = inject(TranslateService);
 
 	meet = input.required<Meet>();

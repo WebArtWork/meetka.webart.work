@@ -1,4 +1,4 @@
-import { GeoPoint } from './meetka.models';
+import { GeoPoint } from './geo.interface';
 
 const EARTH_RADIUS_KM = 6371;
 

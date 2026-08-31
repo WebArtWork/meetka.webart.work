@@ -3,17 +3,17 @@ import { DecimalPipe } from '@angular/common';
 import { CardModule } from '@wawjs/ngx-prime/card';
 import { TagModule } from '@wawjs/ngx-prime/tag';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShop } from '../../meetka/meetka.models';
-import { InterestChipsComponent } from './interest-chips.component';
+import { CoffeeShop } from '../coffee-shop.interface';
+import { InterestShortComponent } from '../../interest/interest-short/interest-short.component';
 
 @Component({
-	selector: 'app-coffee-shop-card',
-	imports: [CardModule, TagModule, DecimalPipe, InterestChipsComponent],
-	templateUrl: './coffee-shop-card.component.html',
-	styleUrl: './coffee-shop-card.component.scss',
+	selector: 'app-coffee-shop-short',
+	imports: [CardModule, TagModule, DecimalPipe, InterestShortComponent],
+	templateUrl: './coffee-shop-short.component.html',
+	styleUrl: './coffee-shop-short.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CoffeeShopCardComponent {
+export class CoffeeShopShortComponent {
 	readonly translateService = inject(TranslateService);
 
 	coffeeShop = input.required<CoffeeShop>();

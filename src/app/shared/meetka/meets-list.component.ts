@@ -5,16 +5,16 @@ import { SelectModule } from '@wawjs/ngx-prime/select';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../meetka/coffee-shops.service';
-import { MeetsService } from '../../meetka/meets.service';
-import { GeoService } from '../../meetka/geo.service';
-import { filterMeets, MeetsFilter } from '../../meetka/meets-filter.util';
+import { CoffeeShopsService } from '../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../features/meet/meet.service';
+import { GeoService } from '../geo/geo.service';
+import { filterMeets, MeetsFilter } from '../../features/meet/meet-filter.util';
 import { InterestsFilterComponent } from '../../components/interests-filter/interests-filter.component';
-import { MeetCardComponent } from './meet-card.component';
+import { MeetShortComponent } from '../../features/meet/meet-short/meet-short.component';
 
 @Component({
 	selector: 'app-meets-list',
-	imports: [FormsModule, SelectModule, ButtonModule, InterestsFilterComponent, MeetCardComponent],
+	imports: [FormsModule, SelectModule, ButtonModule, InterestsFilterComponent, MeetShortComponent],
 	templateUrl: './meets-list.component.html',
 	styleUrl: './meets-list.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

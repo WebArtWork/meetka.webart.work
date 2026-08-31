@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { AccordionModule } from '@wawjs/ngx-prime/accordion';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { BaristasService } from '../../../meetka/baristas.service';
+import { BaristasService } from '../../../features/barista/barista.service';
 import { LeadFormComponent } from '../../../shared/meetka/lead-form.component';
 
 @Component({

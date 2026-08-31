@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { COFFEE_SHOPS } from '@data/meetka/coffee-shops';
-import { CoffeeShop } from './meetka.models';
+import { COFFEE_SHOPS } from './coffee-shop.data';
+import { CoffeeShop } from './coffee-shop.interface';
 
 @Injectable({ providedIn: 'root' })
 export class CoffeeShopsService {

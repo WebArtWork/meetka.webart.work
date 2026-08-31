@@ -1,4 +1,4 @@
-import { Interest } from './meetka.models';
+import { Interest } from './interest.interface';
 
 export const INTERESTS: Interest[] = [
 	{ id: 'tech', label: 'Technology', icon: 'desktop' },

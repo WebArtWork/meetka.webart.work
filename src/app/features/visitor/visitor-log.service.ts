@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { VisitorLogEntry } from './meetka.models';
+import { VisitorLogEntry } from './visitor.interface';
 
 let _idCounter = 0;
 

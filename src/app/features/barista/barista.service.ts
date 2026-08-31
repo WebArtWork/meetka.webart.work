@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { BARISTA_PROFILES } from '@data/meetka/baristas';
-import { BaristaProfile } from './meetka.models';
+import { BARISTA_PROFILES } from './barista.data';
+import { BaristaProfile } from './barista.interface';
 
 @Injectable({ providedIn: 'root' })
 export class BaristasService {

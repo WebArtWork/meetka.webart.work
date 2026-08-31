@@ -65,7 +65,7 @@
 			<h2>{{ translateService.translate('Upcoming meets')() }}</h2>
 			<div class="profile__meets-grid">
 				@for (meet of upcomingMeets(); track meet.id) {
-					<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
+					<app-meet-short [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
 				}
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 			<h2>{{ translateService.translate('Meets created by me')() }}</h2>
 			<div class="profile__meets-grid">
 				@for (meet of createdMeets(); track meet.id) {
-					<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
+					<app-meet-short [meet]="meet" [coffeeShopName]="coffeeShopName(meet.coffeeShopId)" (open)="openMeet(meet.id)" />
 				}
 			</div>
 		</div>

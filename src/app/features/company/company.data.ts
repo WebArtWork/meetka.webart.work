@@ -1,4 +1,4 @@
-import companyData from '../../data/company/company.json';
+import companyData from '../../../data/company/company.json';
 import { CompanyProfile } from './company.interface';
 
 type RawCompanyProfile = Partial<CompanyProfile>;

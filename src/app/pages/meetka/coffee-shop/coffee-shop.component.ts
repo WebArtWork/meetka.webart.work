@@ -8,16 +8,16 @@ import { MessageService } from '@wawjs/ngx-prime/api';
 import { MetaService } from '@wawjs/ngx-core';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { BaristasService } from '../../../meetka/baristas.service';
-import { InterestChipsComponent } from '../../../shared/meetka/interest-chips.component';
-import { MeetCardComponent } from '../../../shared/meetka/meet-card.component';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { BaristasService } from '../../../features/barista/barista.service';
+import { InterestShortComponent } from '../../../features/interest/interest-short/interest-short.component';
+import { MeetShortComponent } from '../../../features/meet/meet-short/meet-short.component';
 import { meetkaSeoImage } from '../meetka.seo';
 
 @Component({
 	selector: 'app-coffee-shop',
-	imports: [RouterLink, ButtonModule, TagModule, InterestChipsComponent, MeetCardComponent],
+	imports: [RouterLink, ButtonModule, TagModule, InterestShortComponent, MeetShortComponent],
 	templateUrl: './coffee-shop.component.html',
 	styleUrl: './coffee-shop.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

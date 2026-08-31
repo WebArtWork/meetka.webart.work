@@ -36,7 +36,7 @@
 
 	<div class="meets-list__grid">
 		@for (meet of meets(); track meet.id) {
-			<app-meet-card
+			<app-meet-short
 				[meet]="meet"
 				[coffeeShopName]="coffeeShopName(meet.coffeeShopId)"
 				[currentUserId]="userService.user()._id"

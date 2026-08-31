@@ -13,9 +13,9 @@ import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { UserService } from '@wawjs/ngx-bos';
 import { MessageService } from '@wawjs/ngx-prime/api';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { INTERESTS } from '../../../meetka/meetka.interests';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { INTERESTS } from '../../../features/interest/interest.data';
 import { MEET_MUTATE_WEEKDAYS } from './meet-mutate.const';
 import { MeetMutateModel, NEW_MEET_MUTATE_MODEL } from './meet-mutate.interface';
 

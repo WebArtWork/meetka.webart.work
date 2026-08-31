@@ -7,7 +7,7 @@ import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TagModule } from '@wawjs/ngx-prime/tag';
 import { MetaService } from '@wawjs/ngx-core';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
 import { meetkaSeoImage } from '../meetka.seo';
 
 @Component({

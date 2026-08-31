@@ -8,7 +8,7 @@
 	<h3 class="coffee-shop-card__title">{{ coffeeShop().name }}</h3>
 	<p class="coffee-shop-card__address">{{ coffeeShop().address }}</p>
 
-	<app-interest-chips [interestIds]="coffeeShop().interestIds" />
+	<app-interest-short [interestIds]="coffeeShop().interestIds" />
 
 	<div class="coffee-shop-card__meta">
 		@if (distanceKm() != null) {
