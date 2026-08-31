@@ -37,6 +37,17 @@
 			/>
 		</li>
 
+		<li
+			class="inline-flex items-center max-md:flex-1 max-md:justify-center"
+		>
+			<app-nav-icon
+				routerLink="/feedback"
+				icon="comment"
+				[name]="viewport() === 'mobile' ? '' : translateService.translate('Feedback')()"
+				[ariaLabel]="translateService.translate('Feedback')()"
+			/>
+		</li>
+
 		<li class="mx-auto max-md:hidden"></li>
 
 		@if (sidebarToggler()) {

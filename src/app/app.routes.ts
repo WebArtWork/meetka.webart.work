@@ -21,6 +21,22 @@ export const routes: Routes = [
 		children: [
 			...meetkaRoutes,
 			{
+				path: 'feedback',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Відгук',
+						description: 'Поділись відгуком або повідом про помилку в Meetka.',
+						image: meetkaSeoImage,
+						index: false,
+					},
+				},
+				loadChildren: () =>
+					import('./pages/user/feedback/feedback.routes').then(
+						(m) => m.routes,
+					),
+			},
+			{
 				// Unlike dashboard/profile, Settings has anonymous-friendly options
 				// (theme, language, discovery radius) — no auth guard here.
 				// SettingsComponent itself hides the auth-only bits (change
