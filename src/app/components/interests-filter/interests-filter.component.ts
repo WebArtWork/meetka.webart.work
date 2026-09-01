@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input, model } from '@angul
 import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from '@wawjs/ngx-prime/multiselect';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { INTERESTS } from '../../meetka/meetka.interests';
+import { INTERESTS } from '../../features/interest/interest.data';
 
 /**
  * Global filter control for picking Meetka interests, backed by a

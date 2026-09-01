@@ -6,7 +6,7 @@
 
 		<div class="coffee-shop-page__header">
 			<h1 class="coffee-shop-page__title">{{ shop.name }}</h1>
-			<app-interest-chips [interestIds]="shop.interestIds" />
+			<app-interest-short [interestIds]="shop.interestIds" />
 		</div>
 
 		<p class="coffee-shop-page__description">{{ shop.description }}</p>
@@ -46,7 +46,7 @@
 			@if (upcomingMeets().length) {
 				<div class="coffee-shop-page__meets">
 					@for (meet of upcomingMeets(); track meet.id) {
-						<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName()" (open)="openMeet(meet.id)" />
+						<app-meet-short [meet]="meet" [coffeeShopName]="coffeeShopName()" (open)="openMeet(meet.id)" />
 					}
 				</div>
 			} @else {
@@ -59,7 +59,7 @@
 				<h2>{{ translateService.translate('Recurring meets')() }}</h2>
 				<div class="coffee-shop-page__meets">
 					@for (meet of recurringMeets(); track meet.id) {
-						<app-meet-card [meet]="meet" [coffeeShopName]="coffeeShopName()" (open)="openMeet(meet.id)" />
+						<app-meet-short [meet]="meet" [coffeeShopName]="coffeeShopName()" (open)="openMeet(meet.id)" />
 					}
 				</div>
 			</section>

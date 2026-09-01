@@ -20,7 +20,7 @@ import {
 import { FieldErrorComponent } from '../../../shared/field-error/field-error.component';
 import { languageFlagUrl } from '../../../shared/language-flags/language-flags';
 import { ThemeState } from '../../../theme/theme-state';
-import { GeoService } from '../../../meetka/geo.service';
+import { GeoService } from '../../../shared/geo/geo.service';
 import { SecurityModel } from './settings.interface';
 import { securitySchema } from './settings.schema';
 

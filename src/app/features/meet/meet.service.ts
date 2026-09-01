@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { MEETS } from './meetka.mock-data';
-import { Meet, MeetParticipant } from './meetka.models';
+import { MEETS } from './meet.data';
+import { Meet, MeetParticipant } from './meet.interface';
 
 let _idCounter = 0;
 

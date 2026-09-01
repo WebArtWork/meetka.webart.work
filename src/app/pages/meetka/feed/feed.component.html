@@ -5,7 +5,7 @@
 		<div class="feed__list">
 			@for (shop of items; track shop.id) {
 				<div class="feed__item">
-					<app-coffee-shop-card
+					<app-coffee-shop-short
 						[coffeeShop]="shop"
 						[upcomingMeetCount]="upcomingMeetCountByShop().get(shop.id) ?? 0"
 						[distanceKm]="distanceToShop(shop.location)"

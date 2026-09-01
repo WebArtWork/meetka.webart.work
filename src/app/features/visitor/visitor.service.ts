@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
-import { VISITORS } from '@data/meetka/visitors';
-import { Visitor } from './meetka.models';
+import { VISITORS } from './visitor.data';
+import { Visitor } from './visitor.interface';
 
 @Injectable({ providedIn: 'root' })
 export class VisitorsService {

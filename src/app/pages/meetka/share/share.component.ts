@@ -12,7 +12,7 @@ import { MessageService } from '@wawjs/ngx-prime/api';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { QrCodeComponent } from '../../../shared/meetka/qr-code.component';
-import { companyProfile } from '../../../company/company.data';
+import { companyProfile } from '../../../features/company/company.data';
 
 export type ShareKind = 'app' | 'profile';
 

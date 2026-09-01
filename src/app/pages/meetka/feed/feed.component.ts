@@ -2,17 +2,17 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { Router } from '@angular/router';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { GeoService } from '../../../meetka/geo.service';
-import { distanceKm } from '../../../meetka/geo.util';
-import { CoffeeShopCardComponent } from '../../../shared/meetka/coffee-shop-card.component';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { GeoService } from '../../../shared/geo/geo.service';
+import { distanceKm } from '../../../shared/geo/geo.util';
+import { CoffeeShopShortComponent } from '../../../features/coffee-shop/coffee-shop-short/coffee-shop-short.component';
 
 type FeedAction = 'favourite' | 'ignore';
 
 @Component({
 	selector: 'app-feed',
-	imports: [ButtonModule, CoffeeShopCardComponent],
+	imports: [ButtonModule, CoffeeShopShortComponent],
 	templateUrl: './feed.component.html',
 	styleUrl: './feed.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { Visitor } from '../../app/meetka/meetka.models';
+import { Visitor } from './visitor.interface';
 
 /**
  * Placeholder visitor (attendee) profiles. Replace with real user data

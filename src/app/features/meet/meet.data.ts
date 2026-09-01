@@ -1,4 +1,4 @@
-import { Meet } from './meetka.models';
+import { Meet } from './meet.interface';
 
 function isoDate(offsetDays: number): string {
 	const date = new Date();

@@ -1,5 +1,7 @@
-import { CoffeeShop, GeoPoint, Meet } from './meetka.models';
-import { distanceKm } from './geo.util';
+import { CoffeeShop } from '../coffee-shop/coffee-shop.interface';
+import { GeoPoint } from '../../shared/geo/geo.interface';
+import { Meet } from './meet.interface';
+import { distanceKm } from '../../shared/geo/geo.util';
 
 export interface MeetsFilter {
 	search?: string;

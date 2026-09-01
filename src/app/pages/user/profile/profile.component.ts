@@ -19,10 +19,10 @@ import { SelectButtonModule } from '@wawjs/ngx-prime/selectbutton';
 import { MultiSelectModule } from '@wawjs/ngx-prime/multiselect';
 import { TranslateDirective, TranslateService } from '@wawjs/ngx-translate';
 import { MeetkaProfileService } from '../../../meetka/meetka-profile.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { INTERESTS } from '../../../meetka/meetka.interests';
-import { MeetCardComponent } from '../../../shared/meetka/meet-card.component';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { INTERESTS } from '../../../features/interest/interest.data';
+import { MeetShortComponent } from '../../../features/meet/meet-short/meet-short.component';
 import { ProfileModel } from './profile.interface';
 import { profileSchema } from './profile.schema';
 
@@ -39,7 +39,7 @@ import { profileSchema } from './profile.schema';
 		MultiSelectModule,
 		FileComponent,
 		TranslateDirective,
-		MeetCardComponent,
+		MeetShortComponent,
 	],
 	templateUrl: './profile.component.html',
 	styleUrl: './profile.component.scss',

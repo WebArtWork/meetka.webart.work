@@ -3,16 +3,16 @@ import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { GeoService } from '../../../meetka/geo.service';
-import { distanceKm } from '../../../meetka/geo.util';
-import { CoffeeShopCardComponent } from '../../../shared/meetka/coffee-shop-card.component';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { GeoService } from '../../../shared/geo/geo.service';
+import { distanceKm } from '../../../shared/geo/geo.util';
+import { CoffeeShopShortComponent } from '../../../features/coffee-shop/coffee-shop-short/coffee-shop-short.component';
 import { InterestsFilterComponent } from '../../../components/interests-filter/interests-filter.component';
 
 @Component({
 	selector: 'app-coffee-shops',
-	imports: [RouterLink, ButtonModule, CoffeeShopCardComponent, InterestsFilterComponent],
+	imports: [RouterLink, ButtonModule, CoffeeShopShortComponent, InterestsFilterComponent],
 	templateUrl: './coffee-shops.component.html',
 	styleUrl: './coffee-shops.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

@@ -17,7 +17,7 @@ import { InputTextModule } from '@wawjs/ngx-prime/inputtext';
 import { TextareaModule } from '@wawjs/ngx-prime/textarea';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { InterestsFilterComponent } from '../../../components/interests-filter/interests-filter.component';
-import { VisitorsService } from '../../../meetka/visitors.service';
+import { VisitorsService } from '../../../features/visitor/visitor.service';
 
 @Component({
 	selector: 'app-onboarding',

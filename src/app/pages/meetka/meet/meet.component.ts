@@ -9,16 +9,16 @@ import { MessageService } from '@wawjs/ngx-prime/api';
 import { MetaService } from '@wawjs/ngx-core';
 import { UserService } from '@wawjs/ngx-bos';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { CoffeeShopsService } from '../../../meetka/coffee-shops.service';
-import { MeetsService } from '../../../meetka/meets.service';
-import { InterestChipsComponent } from '../../../shared/meetka/interest-chips.component';
+import { CoffeeShopsService } from '../../../features/coffee-shop/coffee-shop.service';
+import { MeetsService } from '../../../features/meet/meet.service';
+import { InterestShortComponent } from '../../../features/interest/interest-short/interest-short.component';
 import { meetkaSeoImage } from '../meetka.seo';
 
 const WEEKDAY_LABELS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 @Component({
 	selector: 'app-meet',
-	imports: [ButtonModule, TagModule, AvatarModule, InterestChipsComponent],
+	imports: [ButtonModule, TagModule, AvatarModule, InterestShortComponent],
 	templateUrl: './meet.component.html',
 	styleUrl: './meet.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,

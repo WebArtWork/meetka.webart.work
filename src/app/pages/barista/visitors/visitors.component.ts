@@ -4,7 +4,7 @@ import { InputTextModule } from '@wawjs/ngx-prime/inputtext';
 import { TextareaModule } from '@wawjs/ngx-prime/textarea';
 import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TranslateService } from '@wawjs/ngx-translate';
-import { BaristaVisitorsService } from '../../../meetka/barista-visitors.service';
+import { BaristaVisitorsService } from '../../../features/visitor/visitor-log.service';
 
 @Component({
 	selector: 'app-barista-visitors',

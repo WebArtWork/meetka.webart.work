@@ -1,4 +1,4 @@
-import { CoffeeShop } from '../../app/meetka/meetka.models';
+import { CoffeeShop } from './coffee-shop.interface';
 
 /**
  * Placeholder coffee shops. Replace with real venues before launch —
