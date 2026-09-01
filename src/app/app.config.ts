@@ -20,7 +20,27 @@ import { provideNgxSocket } from '@wawjs/ngx-socket';
 import { provideNgxTinymce } from '@wawjs/ngx-tinymce';
 import { provideTranslate } from '@wawjs/ngx-translate';
 import { provideNgxPrime } from '@wawjs/ngx-prime/config';
+import { definePreset } from '@wawjs/css-prime-styled';
 import Aura from '@wawjs/css-prime-themes/aura';
+
+/** Meetka brand coffee brown, matched to the logo's cup color. */
+const MeetkaPreset = definePreset(Aura, {
+	semantic: {
+		primary: {
+			50: '#f8f2ed',
+			100: '#eddfd0',
+			200: '#d9bda0',
+			300: '#c2996f',
+			400: '#a97a4c',
+			500: '#8a5e37',
+			600: '#6f4a2c',
+			700: '#5a3c25',
+			800: '#4a3221',
+			900: '#3f2b1f',
+			950: '#22160f',
+		},
+	},
+});
 import { NgxBosConfig, ngxBosProvide } from '@wawjs/ngx-bos';
 import { io } from 'socket.io-client';
 import { environment } from '@env';
@@ -73,7 +93,7 @@ export const appConfig: ApplicationConfig = {
 		}),
 		provideNgxPrime({
 			theme: {
-				preset: Aura,
+				preset: MeetkaPreset,
 				options: { darkModeSelector: "[data-mode='dark']" },
 			},
 		}),

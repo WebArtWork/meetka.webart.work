@@ -191,6 +191,22 @@ export const meetkaRoutes: Routes = [
 			),
 	},
 	{
+		path: 'for-users',
+		canActivate: [MetaGuard],
+		data: {
+			meta: {
+				title: 'Для користувачів',
+				description:
+					"Відкривай кав'ярні, створюй та приєднуйся до зустрічей, спілкуйся з учасниками.",
+				image: meetkaSeoImage,
+			},
+		},
+		loadComponent: () =>
+			import('./for-users/for-users.component').then(
+				(m) => m.ForUsersPageComponent,
+			),
+	},
+	{
 		// Barista identity comes via the `id` query param (?id=...), not a path
 		// segment — profiles will be loaded from the API by id.
 		// Title/description/image are overridden per barista by ProfilePageComponent via MetaService.applyMeta().

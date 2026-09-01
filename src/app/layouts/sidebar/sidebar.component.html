@@ -137,6 +137,15 @@
 
 	<app-nav-icon
 		[class.sidebar--minimized-icon]="!showNames()"
+		[name]="showNames() ? translateService.translate('For Users')() : ''"
+		[ariaLabel]="translateService.translate('For Users')()"
+		(click)="closeIfOverlay()"
+		routerLink="/for-users"
+		icon="users"
+	/>
+
+	<app-nav-icon
+		[class.sidebar--minimized-icon]="!showNames()"
 		[name]="showNames() ? translateService.translate('Share Meetka')() : ''"
 		[ariaLabel]="translateService.translate('Share Meetka')()"
 		(click)="closeIfOverlay()"

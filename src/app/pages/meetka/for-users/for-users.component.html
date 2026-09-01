@@ -1,0 +1,48 @@
+@if (showForm()) {
+	<div class="landing-page">
+		<header class="landing-page__hero">
+			<h1>{{ translateService.translate('Join Meetka')() }}</h1>
+		</header>
+
+		<app-lead-form kind="user" [submitLabel]="translateService.translate('Join Meetka')()" />
+	</div>
+} @else {
+	<div class="landing-page">
+		<header class="landing-page__hero">
+			<h1>{{ translateService.translate('Meet people over coffee you\'ll actually enjoy')() }}</h1>
+			<p>{{ translateService.translate('Meetka helps you discover coffee shops nearby, create or join meets around your interests, and build a social profile as you go.')() }}</p>
+			<button pButton type="button" (click)="showForm.set(true)">{{ translateService.translate('Join Meetka')() }}</button>
+		</header>
+
+		<section class="landing-page__section">
+			<h2>{{ translateService.translate('How it works')() }}</h2>
+			<ul class="landing-page__list">
+				<li>{{ translateService.translate('Discover coffee shops near you on the map or in the feed.')() }}</li>
+				<li>{{ translateService.translate('Create a public meet at your favorite spot, or join one that\'s already happening.')() }}</li>
+				<li>{{ translateService.translate('Interact with other participants before and during the meet.')() }}</li>
+				<li>{{ translateService.translate('Build a social profile that reflects your interests and meet history.')() }}</li>
+			</ul>
+		</section>
+
+		<section class="landing-page__section">
+			<h2>{{ translateService.translate('Why Meetka')() }}</h2>
+			<p>{{ translateService.translate('Meetka is about real, low-pressure connections in real life — not another feed to scroll. Find a meet that fits your interests, show up, and let the coffee shop do the rest.')() }}</p>
+		</section>
+
+		<section class="landing-page__section">
+			<h2>{{ translateService.translate('FAQ')() }}</h2>
+			<p-accordion [multiple]="true">
+				@for (item of faq; track item.question) {
+					<p-accordionpanel [value]="item.question">
+						<p-accordionheader>{{ translateService.translate(item.question)() }}</p-accordionheader>
+						<p-accordioncontent>{{ translateService.translate(item.answer)() }}</p-accordioncontent>
+					</p-accordionpanel>
+				}
+			</p-accordion>
+		</section>
+
+		<footer class="landing-page__cta">
+			<button pButton type="button" (click)="showForm.set(true)">{{ translateService.translate('Join Meetka')() }}</button>
+		</footer>
+	</div>
+}

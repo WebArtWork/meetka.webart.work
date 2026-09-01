@@ -6,11 +6,12 @@ import { ButtonModule } from '@wawjs/ngx-prime/button';
 import { TranslateService } from '@wawjs/ngx-translate';
 import { ContactService } from '../../meetka/contact.service';
 
-export type LeadFormKind = 'coffee-shop' | 'barista';
+export type LeadFormKind = 'coffee-shop' | 'barista' | 'user';
 
 const KIND_LABELS: Record<LeadFormKind, string> = {
 	'coffee-shop': 'Coffee shop partnership',
 	barista: 'Barista application',
+	user: 'User application',
 };
 
 /** Inline lead-capture form used on the /for-coffee-shops and /for-baristas landing pages. Sends to the Meetka Telegram contact channel. */
