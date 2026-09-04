@@ -8,11 +8,45 @@ import { baristaGuard } from './pages/barista/barista.guard';
 
 export const routes: Routes = [
 	{
-		// Public discovery — no auth guard, so Map/Coffee Shops/Meets stay
-		// reachable without signing in. Personal actions (create/edit a meet,
-		// My Meets) are still gated per-route below. Registered first so the
-		// root path (today's meets, via meetkaRoutes) matches immediately
-		// instead of falling through the guest/barista blocks below.
+		// Marketing landing for anonymous visitors only — guestGuard redirects
+		// an already-signed-in user to their profile, so this never shadows
+		// the feed for returning users. Registered first so it wins the root
+		// path before the public-discovery block below.
+		path: '',
+		canActivate: [guestGuard],
+		loadComponent: () =>
+			import('./layouts/guest/guest.component').then(
+				(m) => m.GuestComponent,
+			),
+		children: [
+			{
+				path: '',
+				canActivate: [MetaGuard],
+				data: {
+					meta: {
+						title: 'Meetka',
+						description:
+							"Знаходь публічні зустрічі за інтересами у кав'ярнях поруч, приєднуйся або створюй свою.",
+						image: meetkaSeoImage,
+					},
+				},
+				loadComponent: () =>
+					import('./pages/guest/landing/landing.component').then(
+						(m) => m.LandingComponent,
+					),
+			},
+		],
+	},
+	{
+		// Public discovery — reachable without signing in for anyone who
+		// navigates here directly (e.g. /map, /coffee-shops). Personal
+		// actions (create/edit a meet, My Meets) are still gated per-route
+		// below. NOTE: the root path '' is now claimed by the guestGuard
+		// landing block above for anonymous visitors; a signed-in user
+		// hitting '/' is redirected by guestGuard to config.profilePath
+		// instead of reaching the feed here — this is an intentional,
+		// user-approved change from the previous behavior (feed as home for
+		// everyone).
 		path: '',
 		loadComponent: () =>
 			import('./layouts/user/user.component').then(
