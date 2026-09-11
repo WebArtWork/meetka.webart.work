@@ -1,0 +1,27 @@
+<div class="interests-page">
+	<div class="interests-page__header">
+		<h1 class="interests-page__title">{{ translateService.translate('Інтереси')() }}</h1>
+		<p class="interests-page__subtitle">
+			{{ translateService.translate('Обирай теги за інтересами, щоб знаходити однодумців у кав’ярнях Meetka.')() }}
+		</p>
+	</div>
+
+	<div class="interests-page__grid">
+		@for (interest of interests; track interest.id) {
+			<button type="button" class="interests-page__tag">
+				<i class="pi pi-{{ interest.icon }}"></i>
+				<span>{{ translateService.translate(interest.label)() }}</span>
+			</button>
+		} @empty {
+			<p class="interests-page__empty">{{ translateService.translate('Поки що немає доступних інтересів.')() }}</p>
+		}
+	</div>
+
+	<p class="interests-page__hint">
+		{{ translateService.translate('Вибір інтересів впливає на список кав’ярень і зустрічей, які тобі показуємо.')() }}
+	</p>
+
+	<a pButton routerLink="/coffee-shops" severity="secondary" size="small" class="interests-page__cta">
+		{{ translateService.translate('Переглянути кав’ярні')() }}
+	</a>
+</div>

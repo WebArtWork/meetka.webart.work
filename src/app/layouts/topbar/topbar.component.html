@@ -19,21 +19,10 @@
 			class="inline-flex items-center max-md:flex-1 max-md:justify-center"
 		>
 			<app-nav-icon
-				routerLink="/feed"
-				icon="compass"
-				[name]="viewport() === 'mobile' ? '' : translateService.translate('Feed')()"
-				[ariaLabel]="translateService.translate('Feed')()"
-			/>
-		</li>
-
-		<li
-			class="inline-flex items-center max-md:flex-1 max-md:justify-center"
-		>
-			<app-nav-icon
 				routerLink="/my-meets"
-				icon="bookmark"
-				[name]="viewport() === 'mobile' ? '' : translateService.translate('My Meets')()"
-				[ariaLabel]="translateService.translate('My Meets')()"
+				icon="users"
+				[name]="viewport() === 'mobile' ? '' : translateService.translate('Meets')()"
+				[ariaLabel]="translateService.translate('Meets')()"
 			/>
 		</li>
 
@@ -41,10 +30,10 @@
 			class="inline-flex items-center max-md:flex-1 max-md:justify-center"
 		>
 			<app-nav-icon
-				routerLink="/feedback"
-				icon="comment"
-				[name]="viewport() === 'mobile' ? '' : translateService.translate('Feedback')()"
-				[ariaLabel]="translateService.translate('Feedback')()"
+				routerLink="/interests"
+				icon="heart"
+				[name]="viewport() === 'mobile' ? '' : translateService.translate('Interests')()"
+				[ariaLabel]="translateService.translate('Interests')()"
 			/>
 		</li>
 

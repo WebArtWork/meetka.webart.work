@@ -1,0 +1,46 @@
+.interests-page__header {
+	margin-bottom: 1rem;
+}
+
+.interests-page__title {
+	margin: 0 0 0.5rem;
+}
+
+.interests-page__subtitle {
+	margin: 0;
+	color: var(--c-text-muted);
+}
+
+.interests-page__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 0.75rem;
+	margin-bottom: 1rem;
+}
+
+.interests-page__tag {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	border: 1px solid var(--c-border);
+	border-radius: 999px;
+	background: var(--c-bg-secondary);
+	color: var(--c-text-secondary);
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	transition: border-color 0.15s, color 0.15s;
+
+	&:hover {
+		border-color: var(--c-primary);
+		color: var(--c-primary);
+	}
+}
+
+.interests-page__empty {
+	color: var(--c-text-muted);
+}
+
+.interests-page__hint {
+	color: var(--c-text-muted);
+	margin: 0 0 1rem;
+}

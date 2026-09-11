@@ -159,6 +159,22 @@ export const meetkaRoutes: Routes = [
 			),
 	},
 	{
+		path: 'interests',
+		canActivate: [MetaGuard],
+		data: {
+			meta: {
+				title: 'Інтереси',
+				description:
+					"Обирай теги за інтересами, щоб знаходити однодумців у кав'ярнях Meetka.",
+				image: meetkaSeoImage,
+			},
+		},
+		loadComponent: () =>
+			import('./interests/interests.component').then(
+				(m) => m.InterestsPageComponent,
+			),
+	},
+	{
 		path: 'for-coffee-shops',
 		canActivate: [MetaGuard],
 		data: {
