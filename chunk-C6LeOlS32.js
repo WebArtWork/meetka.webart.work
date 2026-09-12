@@ -1,0 +1,1 @@
+import{E as Gf,It as _d,b as Fa}from"./chunk-FhScA4IO.js";var c=(()=>{class e{static{this.ɵfac=function(t){return new(t||e)}}static{this.ɵcmp=_d({type:e,selectors:[[`ng-component`]],decls:1,vars:0,template:function(t,p){t&1&&Fa(0,`router-outlet`)},dependencies:[Gf],encapsulation:2})}}return e})();export{c as GuestComponent};

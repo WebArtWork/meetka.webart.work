@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /$
+Allow: /map$
+Allow: /coffee-shops$
+Allow: /meets$
+Allow: /for-coffee-shops$
+Allow: /for-baristas$
+Allow: /sign$
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /settings
+Disallow: /my-meets
+Disallow: /meet/mutate
+Disallow: /admin
+
+Sitemap: https://meetka.webart.work/sitemap.xml
